@@ -12,8 +12,9 @@ const IndexPage = () => {
       <textarea value={thread} readOnly style={{width: '100%', height: 200}}/>
       <input value={addition} onChange={e => setAddition(e.target.value)}/>
       <button onClick={async () => {
-        let response = await fetcher(`/api/chat?thread=${thread + addition}`)
-        setThread(thread + addition + "\n" + response + "\nHuman: ")
+        let prompt = thread + addition + "\nAI:"
+        let response = await fetcher(`/api/chat?thread=${prompt}`)
+        setThread(prompt + response + "\nHuman: ")
         setAddition('')
       }
       }>send

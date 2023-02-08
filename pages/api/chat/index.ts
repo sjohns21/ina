@@ -9,7 +9,7 @@ const openai = new OpenAIApi(configuration)
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const response = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: req.query.thread,
+    prompt: req.query.prompt,
     temperature: 0.9,
     max_tokens: 150,
     top_p: 1,

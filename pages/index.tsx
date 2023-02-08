@@ -13,7 +13,7 @@ const IndexPage = () => {
       <input value={addition} onChange={e => setAddition(e.target.value)}/>
       <button onClick={async () => {
         let prompt = thread + addition + "\nAI:"
-        let response = await fetcher(`/api/chat?thread=${prompt}`)
+        let response = await fetcher(`/api/chat?prompt=${prompt}`)
         setThread(prompt + response + "\nHuman: ")
         setAddition('')
       }

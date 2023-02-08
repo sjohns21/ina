@@ -13,7 +13,8 @@ const IndexPage = () => {
       <input value={addition} onChange={e => setAddition(e.target.value)}/>
       <button onClick={async () => {
         let response = await fetcher(`/api/chat?thread=${thread + addition}`)
-        setThread(thread + addition + response)
+        setThread(thread + addition + "\n" + response + "Human: ")
+        setAddition('')
       }
       }>send
       </button>

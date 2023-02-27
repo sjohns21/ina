@@ -7,8 +7,7 @@ const IndexPage = () => {
   const [thread, setThread] = useState(initialThread)
   const [addition, setAddition] = useState('')
   return (
-    <Layout title="Chat App">
-      <h1>Chat App</h1>
+    <Layout title="Chat Plus">
       <textarea value={thread} readOnly style={{width: '100%', height: 200}}/>
       <input value={addition} onChange={e => setAddition(e.target.value)}/>
       <button onClick={async () => {

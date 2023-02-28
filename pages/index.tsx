@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import { useState } from "react";
+import { Input } from "@mui/material";
 
 const fetcher = (
   ...args: [input: RequestInfo | URL, init?: RequestInit | undefined]
@@ -15,7 +16,7 @@ const IndexPage = () => {
         readOnly
         style={{ width: "100%", height: 200 }}
       />
-      <input value={addition} onChange={(e) => setAddition(e.target.value)} />
+      <Input value={addition} onChange={(e) => setAddition(e.target.value)} />
       <button
         onClick={async () => {
           let prompt = thread + addition + "\nAI:";

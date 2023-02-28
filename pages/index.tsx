@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import { useMemo, useState } from "react";
 import { CircularProgress, IconButton, Input } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import Box from "@mui/material/Box";
 
 const fetcher = (
   ...args: [input: RequestInfo | URL, init?: RequestInit | undefined]
@@ -28,7 +29,7 @@ const IndexPage = () => {
           {row}
         </div>
       ))}
-      <div style={{ display: "flex", height: "1.5em" }}>
+      <Box sx={{ display: "flex" }}>
         {loading ? (
           <CircularProgress />
         ) : (
@@ -44,7 +45,7 @@ const IndexPage = () => {
             </IconButton>
           </>
         )}
-      </div>
+      </Box>
     </Layout>
   );
 };

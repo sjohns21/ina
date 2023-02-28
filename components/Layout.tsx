@@ -8,16 +8,13 @@ type Props = {
 };
 
 const Layout = ({ children, title = "This is the default title" }: Props) => (
-  <div>
+  <div style={{ padding: "1em" }}>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     {children}
-    <footer>
-      <hr />
-    </footer>
   </div>
 );
 

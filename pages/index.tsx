@@ -11,6 +11,13 @@ const IndexPage = () => {
   const [thread, setThread] = useState(initialThread);
   const [addition, setAddition] = useState("");
   const rows = useMemo(() => thread.split("\n").slice(2), [thread]);
+
+  const send = async () => {
+    let prompt = thread + addition + "\nAI:";
+    let response = await fetcher(`/api/chat?prompt=${prompt}`);
+    setThread(prompt + response + "\nHuman: ");
+    setAddition("");
+  };
   return (
     <Layout title="Chat Plus">
       {rows.map((row, i) => (
@@ -23,16 +30,9 @@ const IndexPage = () => {
           value={addition}
           onChange={(e) => setAddition(e.target.value)}
           fullWidth
+          onKeyDown={(e) => e.key === "Enter" && send()}
         />
-        <IconButton
-          aria-label="delete"
-          onClick={async () => {
-            let prompt = thread + addition + "\nAI:";
-            let response = await fetcher(`/api/chat?prompt=${prompt}`);
-            setThread(prompt + response + "\nHuman: ");
-            setAddition("");
-          }}
-        >
+        <IconButton aria-label="send" onClick={send}>
           <SendIcon />
         </IconButton>
       </div>

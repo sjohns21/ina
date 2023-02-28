@@ -17,18 +17,24 @@ const IndexPage = () => {
         readOnly
         style={{ width: "100%", height: 200 }}
       />
-      <Input value={addition} onChange={(e) => setAddition(e.target.value)} />
-      <IconButton
-        aria-label="delete"
-        onClick={async () => {
-          let prompt = thread + addition + "\nAI:";
-          let response = await fetcher(`/api/chat?prompt=${prompt}`);
-          setThread(prompt + response + "\nHuman: ");
-          setAddition("");
-        }}
-      >
-        <SendIcon />
-      </IconButton>
+      <div style={{ display: "flex" }}>
+        <Input
+          value={addition}
+          onChange={(e) => setAddition(e.target.value)}
+          fullWidth
+        />
+        <IconButton
+          aria-label="delete"
+          onClick={async () => {
+            let prompt = thread + addition + "\nAI:";
+            let response = await fetcher(`/api/chat?prompt=${prompt}`);
+            setThread(prompt + response + "\nHuman: ");
+            setAddition("");
+          }}
+        >
+          <SendIcon />
+        </IconButton>
+      </div>
     </Layout>
   );
 };

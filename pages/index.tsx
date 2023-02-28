@@ -16,6 +16,7 @@ const IndexPage = () => {
 
   const send = async () => {
     let prompt = thread + addition + "\nAI:";
+    setThread(prompt);
     setAddition("");
     setLoading(true);
     let response = await fetcher(`/api/chat?prompt=${prompt}`);

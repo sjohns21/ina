@@ -1,6 +1,7 @@
 import Layout from "../components/Layout";
 import { useState } from "react";
-import { Input } from "@mui/material";
+import { IconButton, Input } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
 const fetcher = (
   ...args: [input: RequestInfo | URL, init?: RequestInit | undefined]
@@ -17,7 +18,8 @@ const IndexPage = () => {
         style={{ width: "100%", height: 200 }}
       />
       <Input value={addition} onChange={(e) => setAddition(e.target.value)} />
-      <button
+      <IconButton
+        aria-label="delete"
         onClick={async () => {
           let prompt = thread + addition + "\nAI:";
           let response = await fetcher(`/api/chat?prompt=${prompt}`);
@@ -25,8 +27,8 @@ const IndexPage = () => {
           setAddition("");
         }}
       >
-        send
-      </button>
+        <SendIcon />
+      </IconButton>
     </Layout>
   );
 };

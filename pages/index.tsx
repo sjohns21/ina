@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { IconButton, Input } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
@@ -10,13 +10,14 @@ const fetcher = (
 const IndexPage = () => {
   const [thread, setThread] = useState(initialThread);
   const [addition, setAddition] = useState("");
+  const rows = useMemo(() => thread.split("\n").slice(2), [thread]);
   return (
     <Layout title="Chat Plus">
-      <textarea
-        value={thread}
-        readOnly
-        style={{ width: "100%", height: 200 }}
-      />
+      {rows.map((row, i) => (
+        <div key={i} style={{ background: i % 2 == 0 ? "white" : "lightgray" }}>
+          {row}
+        </div>
+      ))}
       <div style={{ display: "flex" }}>
         <Input
           value={addition}

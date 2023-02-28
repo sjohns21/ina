@@ -19,7 +19,9 @@ const IndexPage = () => {
     setThread(prompt);
     setAddition("");
     setLoading(true);
-    let response = await fetcher(`/api/chat?prompt=${prompt}`);
+    let response = await fetcher(
+      `/api/chat?prompt=${encodeURIComponent(prompt)}`
+    );
     setThread(prompt + response + "\nHuman: ");
     setLoading(false);
   };

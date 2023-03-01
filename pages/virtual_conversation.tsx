@@ -29,12 +29,15 @@ const VirtualConversationPage = (props: Props) => {
           Start
         </Button>
       ) : (
-        <Chat
-          prompt={`The following is a conversation with ${character}.
-
-You: Who are you?`}
-          AILabel={character as string}
-        />
+        <>
+          <Button variant="text" onClick={() => router.reload()}>
+            New Chat
+          </Button>
+          <Chat
+            prompt={`The following is a conversation with ${character}.\n\nYou: Who are you?`}
+            AILabel={character as string}
+          />
+        </>
       )}
     </Layout>
   );

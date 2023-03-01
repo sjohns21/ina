@@ -9,12 +9,12 @@ const VirtualConversationPage = (props: Props) => {
   const [characterSet, setCharacterSet] = useState(false);
   return (
     <Layout title="Virtual Conversation">
-      Have a virtual conversation with an AI copy of: -a famous person -an
-      author -a fictional character
+      Have a virtual conversation with an AI copy of:
       <Input
         value={character}
         onChange={(e) => setCharacter(e.target.value)}
         readOnly={characterSet}
+        sx={{ pl: 1 }}
       />
       {!characterSet ? (
         <Button variant="text" onClick={() => setCharacterSet(true)}>

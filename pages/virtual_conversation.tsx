@@ -21,6 +21,7 @@ const VirtualConversationPage = (props: Props) => {
           prompt={`The following is a conversation with ${character}.
 
 Human: `}
+          AILabel={character}
         />
       )}
     </Layout>

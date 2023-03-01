@@ -7,14 +7,20 @@ import SendIcon from "@mui/icons-material/Send";
 const fetcher = (
   ...args: [input: RequestInfo | URL, init?: RequestInit | undefined]
 ) => fetch(...args).then((res) => res.json());
-export const Chat = ({ prompt }: { prompt: string }) => {
+export const Chat = ({
+  prompt,
+  AILabel,
+}: {
+  prompt: string;
+  AILabel: string;
+}) => {
   const [thread, setThread] = useState(prompt);
   const [addition, setAddition] = useState("");
   const [loading, setLoading] = useState(false);
   const rows = useMemo(() => thread.split("\n").slice(2), [thread]);
 
   const send = async () => {
-    let prompt = thread + addition + "\nAI:";
+    let prompt = thread + addition + `\n${AILabel}:`;
     setThread(prompt);
     setAddition("");
     setLoading(true);

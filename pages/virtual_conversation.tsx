@@ -20,7 +20,7 @@ const VirtualConversationPage = (props: Props) => {
         <Chat
           prompt={`The following is a conversation with ${character}.
 
-Human: `}
+You: `}
           AILabel={character}
         />
       )}

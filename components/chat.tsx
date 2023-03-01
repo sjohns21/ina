@@ -27,7 +27,7 @@ export const Chat = ({
     let response = await fetcher(
       `/api/chat?prompt=${encodeURIComponent(prompt)}`
     );
-    setThread(prompt + response + "\nHuman: ");
+    setThread(prompt + response + "\nYou: ");
     setLoading(false);
   };
   return (

@@ -47,9 +47,13 @@ export const Chat = ({
           onKeyDown={(e) => e.key === "Enter" && send()}
           disabled={loading}
         />
-        <IconButton aria-label="send" onClick={send}>
-          {loading ? <CircularProgress style={{ height: 24 }} /> : <SendIcon />}
-        </IconButton>
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <IconButton aria-label="send" onClick={send}>
+            <SendIcon />
+          </IconButton>
+        )}
       </Box>
     </Layout>
   );

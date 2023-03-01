@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Layout from "@/components/Layout";
 import Box from "@mui/material/Box";
 import { CircularProgress, IconButton, Input } from "@mui/material";
@@ -18,7 +18,9 @@ export const Chat = ({
   const [addition, setAddition] = useState("");
   const [loading, setLoading] = useState(false);
   const rows = useMemo(() => thread.split("\n").slice(2), [thread]);
-
+  useEffect(() => {
+    send();
+  }, []);
   const send = async () => {
     let prompt = thread + addition + `\n${AILabel}:`;
     setThread(prompt);

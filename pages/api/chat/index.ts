@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0.6,
-    stop: [" Human:", " AI:"],
+    stop: req.query.stop,
   });
   res.status(200).json(response.data.choices[0].text);
 };

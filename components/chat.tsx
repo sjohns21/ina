@@ -40,21 +40,16 @@ export const Chat = ({
         </div>
       ))}
       <Box sx={{ display: "flex" }}>
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          <>
-            <Input
-              value={addition}
-              onChange={(e) => setAddition(e.target.value)}
-              fullWidth
-              onKeyDown={(e) => e.key === "Enter" && send()}
-            />
-            <IconButton aria-label="send" onClick={send}>
-              <SendIcon />
-            </IconButton>
-          </>
-        )}
+        <Input
+          value={addition}
+          onChange={(e) => setAddition(e.target.value)}
+          fullWidth
+          onKeyDown={(e) => e.key === "Enter" && send()}
+          disabled={loading}
+        />
+        <IconButton aria-label="send" onClick={send}>
+          {loading ? <CircularProgress style={{ height: 24 }} /> : <SendIcon />}
+        </IconButton>
       </Box>
     </Layout>
   );

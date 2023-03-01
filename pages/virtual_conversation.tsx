@@ -1,12 +1,17 @@
 import Layout from "@/components/Layout";
 import { Button, Input } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Chat } from "@/components/chat";
+import { useRouter } from "next/router";
 
 type Props = {};
 const VirtualConversationPage = (props: Props) => {
+  const router = useRouter();
   const [character, setCharacter] = useState("");
   const [characterSet, setCharacterSet] = useState(false);
+  useEffect(() => {
+    if (router.query.with) setCharacter(String(router.query.with));
+  }, [router.query.with]);
   return (
     <Layout title="Virtual Conversation">
       Have a virtual conversation with an AI copy of:
@@ -17,7 +22,10 @@ const VirtualConversationPage = (props: Props) => {
         sx={{ pl: 1 }}
       />
       {!characterSet ? (
-        <Button variant="text" onClick={() => setCharacterSet(true)}>
+        <Button
+          variant="text"
+          onClick={() => character && setCharacterSet(true)}
+        >
           Start
         </Button>
       ) : (
@@ -25,7 +33,7 @@ const VirtualConversationPage = (props: Props) => {
           prompt={`The following is a conversation with ${character}.
 
 You: Who are you?`}
-          AILabel={character}
+          AILabel={character as string}
         />
       )}
     </Layout>

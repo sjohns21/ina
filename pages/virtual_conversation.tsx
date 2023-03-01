@@ -18,7 +18,7 @@ const VirtualConversationPage = (props: Props) => {
         </Button>
       ) : (
         <Chat
-          prompt={`The following is a conversation with an AI copy of ${character}. The AI is helpful, creative, clever, and very friendly.
+          prompt={`The following is a conversation with ${character}.
 
 Human: `}
         />

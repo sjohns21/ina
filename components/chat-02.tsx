@@ -27,7 +27,7 @@ export const Chat02 = ({
     setAddition("");
     setLoading(true);
     let response = await fetcher(
-      `/api/chat-02?prompt=${encodeURIComponent(prompt)}&stop=${[
+      `/api/openai/chat-02?prompt=${encodeURIComponent(prompt)}&stop=${[
         `${AILabel}: `,
         "You: ",
       ]}`

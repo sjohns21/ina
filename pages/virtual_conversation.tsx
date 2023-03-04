@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import { Button, Input } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Chat } from "@/components/chat";
+import { Chat02 } from "@/components/chat-02";
 import { useRouter } from "next/router";
 
 type Props = {};
@@ -33,7 +33,7 @@ const VirtualConversationPage = (props: Props) => {
           <Button variant="text" onClick={() => router.reload()}>
             New Chat
           </Button>
-          <Chat
+          <Chat02
             prompt={`The following is a conversation with ${character}.\n\nYou: Who are you?`}
             AILabel={character as string}
           />

@@ -86,7 +86,7 @@ const IndexPage = () => {
           <h2>Highlights:</h2>
           <div>
             {keyPhrases.map((p) => (
-              <div>{p}</div>
+              <div key={p}>{p}</div>
             ))}
           </div>
           <button onClick={getHighlights}>get highlights</button>
@@ -109,6 +109,20 @@ const exampleSummary =
   "• Jack Smith has filled out a form and provided his Medicare card\n" +
   "• Jack Smith has been feeling very tired and run down, despite getting enough sleep\n" +
   "• Jack Smith has lost energy for hobbies he used to enjoy";
+const exampleKeyPhrases = [
+  "Doctor",
+  "patient",
+  "Jack Smith",
+  "appointment",
+  "form",
+  "Medicare card",
+  "Dr. Seuss",
+  "tired",
+  "run down",
+  "sleep",
+  "energy",
+  "hobbies.",
+];
 
 const exampleKeyWords =
   "Doctor, Patient, Appointment, Jack Smith, Medicare card, Dr. Seuss, Tired, Run down, Sleep, Energy, Hobbies.";

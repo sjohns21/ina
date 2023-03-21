@@ -69,7 +69,9 @@ const IndexPage = () => {
         </div>
       </div>
       <div className="flex flex-col bg-purple-50 w-1/2 h-full">
-        <div>{highlightedTranscript}</div>
+        <div>
+          {highlightedTranscript.length ? highlightedTranscript : transcript}
+        </div>
         <RecordAudio setTranscript={setTranscript} />
         <button onClick={getSummary}>Get summary</button>
       </div>

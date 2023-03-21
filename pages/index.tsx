@@ -79,11 +79,11 @@ const IndexPage = () => {
       </div>
       <div className="flex flex-col bg-indigo-50 w-1/2 h-full">
         <div className="h-1/2">
-          <h2>Summary:</h2>
+          <h2 className="text-center">Summary:</h2>
           <div className="whitespace-pre-wrap">{summary}</div>
         </div>
         <div className="h-1/2">
-          <h2>Highlights:</h2>
+          <h2 className="text-center">Highlights:</h2>
           <div className="overflow-auto">
             {keyPhrases.map((p) => (
               <div key={p}>{p}</div>

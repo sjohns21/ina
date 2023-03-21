@@ -9,11 +9,49 @@ import { Send, Settings, List } from "@mui/icons-material";
 const IndexPage = () => {
   const [transcript, setTranscript] = useState("");
   const [summary, setSummary] = useState("");
+  const [highlightedTranscript, setHighlightedTranscript] = useState<
+    React.ReactNode[]
+  >([]);
   const getSummary = async () => {
     setSummary(
       await (await fetch("/api/openai/summarize?text=" + transcript)).text()
     );
   };
+
+  const getHighlights = async () => {
+    const keyPhrases = (
+      await (await fetch("/api/openai/keywords?text=" + transcript)).text()
+    ).split(", ");
+
+    const regExp = new RegExp(keyPhrases.join("|"), "gi");
+    let match;
+    const matches = [];
+    while ((match = regExp.exec(transcript)) !== null) {
+      const start = match.index;
+      const end = regExp.lastIndex;
+      const phrase = match[0];
+      matches.push({ start, end, phrase });
+    }
+    const makeSpan = (s: string, si: number) => (
+      <span key={si} className="bg-yellow-200">
+        {s}
+      </span>
+    );
+    let out: React.ReactNode[] = [];
+    if (matches[0]) {
+      out.push(transcript.substring(0, matches[0].start));
+      for (let mi = 0; mi < matches.length - 1; mi++) {
+        const match = matches[mi];
+        out.push(makeSpan(match.phrase, match.start));
+        out.push(transcript.substring(match.end, matches[mi + 1].start));
+      }
+      const lastMatch = matches[matches.length - 1];
+      out.push(makeSpan(lastMatch.phrase, lastMatch.start));
+      out.push(transcript.substring(lastMatch.end));
+    }
+    setHighlightedTranscript(out);
+  };
+
   return (
     <div className="flex h-full">
       <div className="flex flex-col bg-indigo-200 w-2/12 h-full items-center justify-between">
@@ -31,7 +69,7 @@ const IndexPage = () => {
         </div>
       </div>
       <div className="flex flex-col bg-purple-50 w-1/2 h-full">
-        <div>{transcript}</div>
+        <div>{highlightedTranscript}</div>
         <RecordAudio setTranscript={setTranscript} />
         <button onClick={getSummary}>Get summary</button>
       </div>
@@ -43,6 +81,7 @@ const IndexPage = () => {
         <div className="h-1/2">
           <h2>Highlights:</h2>
           {/*<div>{highlights}</div>*/}
+          <button onClick={getHighlights}>get highlights</button>
         </div>
       </div>
     </div>
@@ -58,3 +97,6 @@ const exampleSummary =
   "• Jack Smith has filled out a form and provided his Medicare card\n" +
   "• Jack Smith has been feeling very tired and run down, despite getting enough sleep\n" +
   "• Jack Smith has lost energy for hobbies he used to enjoy";
+
+const exampleKeyWords =
+  "Doctor, Patient, Appointment, Jack Smith, Medicare card, Dr. Seuss, Tired, Run down, Sleep, Energy, Hobbies.";

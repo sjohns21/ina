@@ -1,6 +1,6 @@
 import { NextApiHandler } from "next";
 import * as fs from "fs";
-import { openai } from "@/pages/api/openai";
+import { openai } from "@/pages/api/openai/index";
 import formidable from "formidable";
 
 export const config = {

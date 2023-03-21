@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { openai } from "@/pages/api/openai";
-
+import { openai } from "@/pages/api/openai/index";
+//february implementation
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const response = await openai.createCompletion({
     model: "text-davinci-003",
@@ -10,7 +10,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0.6,
-    stop: req.query.stop,
+    stop: req.query.stop
   });
   res.status(200).json(response.data.choices[0].text);
 };

@@ -22,10 +22,10 @@ const IndexPage = () => {
           <IconButton aria-label="send">
             <Send />
           </IconButton>
-          <IconButton aria-label="send">
+          <IconButton aria-label="list">
             <List />
           </IconButton>
-          <IconButton aria-label="send">
+          <IconButton aria-label="settings">
             <Settings />
           </IconButton>
         </div>

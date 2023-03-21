@@ -42,10 +42,10 @@ const RecordAudio = ({ setTranscript }: { setTranscript: Dispatch<SetStateAction
 
   return (
     <>
-      <button className="" onClick={startRecording} disabled={recording}>
+      <button className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" onClick={startRecording} disabled={recording}>
         Start recording
       </button>
-      <button onClick={stopRecording} disabled={!recording}>
+      <button className="text-white bg-gray-500 hover:bg-gray-600 rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" onClick={stopRecording} disabled={!recording}>
         Stop recording
       </button>
       {audioURL && (

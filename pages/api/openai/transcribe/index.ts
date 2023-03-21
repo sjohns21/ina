@@ -14,7 +14,7 @@ const post: NextApiHandler = async (req, res) => {
   form.parse(req, async function(err, fields, files) {
     const file = files.file as formidable.File;
     const data = fs.readFileSync(file.filepath);
-    const filePath = `./public/audio.wav`;
+    const filePath = `audio.wav`;
     fs.writeFileSync(filePath, data);
     await fs.unlinkSync(file.filepath);
     const rs = fs.createReadStream(filePath);
@@ -29,12 +29,12 @@ const post: NextApiHandler = async (req, res) => {
 
 const saveFile = async (file: formidable.File) => {
   const data = fs.readFileSync(file.filepath);
-  fs.writeFileSync(`./public/${file.newFilename}`, data);
+  fs.writeFileSync(file.newFilename, data);
   await fs.unlinkSync(file.filepath);
   return;
 };
 
-const handler: NextApiHandler = (req, res) => {
+const handler: NextApiHandler = (req, res) =>
   req.method === "POST"
     ? post(req, res)
     : req.method === "PUT"
@@ -44,7 +44,6 @@ const handler: NextApiHandler = (req, res) => {
         : req.method === "GET"
           ? console.log("GET")
           : res.status(404).send("");
-};
 
 const exampleResponse = "Good morning, do you have an appointment? Yes, my name is Jack Smith. Excellent. There you are there. The doctor will be about 10 minutes. Have you been to this practice before? Can you fill in this short form and can I have your Medicare card? Good morning, I'm Dr. Seuss. How are you feeling today? I have been feeling very tired and run down lately. No matter how much I sleep, you get to wake up tired. You don't have the energy for the hobbies you used to enjoy.";
 

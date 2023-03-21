@@ -3,6 +3,8 @@ import { useState } from "react";
 import React from "react";
 import Image from "next/image";
 import doctor from "../public/doctor.png";
+import { IconButton } from "@mui/material";
+import { Send, Settings, List } from "@mui/icons-material";
 
 const IndexPage = () => {
   const [transcript, setTranscript] = useState("");
@@ -15,8 +17,18 @@ const IndexPage = () => {
   return (
     <div className="flex h-full">
       <div className="flex flex-col bg-indigo-200 w-2/12 h-full items-center">
-        <div className="">left</div>
         <Image src={doctor} alt={"doctor"} width={120} />
+        <div className="flex flex-col">
+          <IconButton aria-label="send">
+            <Send />
+          </IconButton>
+          <IconButton aria-label="send">
+            <List />
+          </IconButton>
+          <IconButton aria-label="send">
+            <Settings />
+          </IconButton>
+        </div>
       </div>
       <div className="flex flex-col bg-purple-50 w-1/2 h-full">
         <div>

@@ -42,7 +42,7 @@ const RecordAudio = ({ setTranscript }: { setTranscript: Dispatch<SetStateAction
 
   return (
     <>
-      <button onClick={startRecording} disabled={recording}>
+      <button className="" onClick={startRecording} disabled={recording}>
         Start recording
       </button>
       <button onClick={stopRecording} disabled={!recording}>

@@ -11,19 +11,22 @@ export const config = {
 
 const post: NextApiHandler = async (req, res) => {
   const form = new formidable.IncomingForm();
-  form.parse(req, async function(err, fields, files) {
-    const file = files.file as formidable.File;
-    const data = fs.readFileSync(file.filepath);
-    const filePath = `audio.wav`;
-    fs.writeFileSync(filePath, data);
-    await fs.unlinkSync(file.filepath);
-    const rs = fs.createReadStream(filePath);
-    const response = await openai.createTranscription(
-      // @ts-ignore
-      rs,
-      "whisper-1"
-    );
-    res.send(response.data.text);
+  return new Promise<void>((resolve, reject) => {
+    form.parse(req, async function(err, fields, files) {
+      const file = files.file as formidable.File;
+      const data = fs.readFileSync(file.filepath);
+      const filePath = `audio.wav`;
+      fs.writeFileSync(filePath, data);
+      await fs.unlinkSync(file.filepath);
+      const rs = fs.createReadStream(filePath);
+      const response = await openai.createTranscription(
+        // @ts-ignore
+        rs,
+        "whisper-1"
+      );
+      res.send(response.data.text);
+      resolve();
+    });
   });
 };
 

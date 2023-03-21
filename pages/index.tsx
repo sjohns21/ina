@@ -16,7 +16,7 @@ const IndexPage = () => {
   };
   return (
     <div className="flex h-full">
-      <div className="flex flex-col bg-indigo-200 w-2/12 h-full items-center">
+      <div className="flex flex-col bg-indigo-200 w-2/12 h-full items-center justify-between">
         <Image src={doctor} alt={"doctor"} width={120} />
         <div className="flex flex-col">
           <IconButton aria-label="send">
@@ -31,18 +31,18 @@ const IndexPage = () => {
         </div>
       </div>
       <div className="flex flex-col bg-purple-50 w-1/2 h-full">
-        <div>
-          center
-          <br />
-          {transcript}
-        </div>
+        <div>{transcript}</div>
         <RecordAudio setTranscript={setTranscript} />
         <button onClick={getSummary}>Get summary</button>
       </div>
       <div className="flex flex-col bg-indigo-50 w-1/2 h-full">
-        <div>
-          right
+        <div className="h-1/2">
+          <h2>Summary:</h2>
           <div>{summary}</div>
+        </div>
+        <div className="h-1/2">
+          <h2>Highlights:</h2>
+          {/*<div>{highlights}</div>*/}
         </div>
       </div>
     </div>

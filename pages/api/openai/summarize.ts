@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     frequency_penalty: 0,
     presence_penalty: 0
   });
-  res.status(200).json(response.data.choices[0].text);
+  res.send(response.data.choices[0].text);
 };
 
 export default handler;

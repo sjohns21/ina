@@ -9,6 +9,7 @@ import { Send, Settings, List } from "@mui/icons-material";
 const IndexPage = () => {
   const [transcript, setTranscript] = useState("");
   const [summary, setSummary] = useState("");
+  const [keyPhrases, setKeyPhrases] = useState<string[]>([]);
   const [highlightedTranscript, setHighlightedTranscript] = useState<
     React.ReactNode[]
   >([]);
@@ -22,6 +23,7 @@ const IndexPage = () => {
     const keyPhrases = (
       await (await fetch("/api/openai/keywords?text=" + transcript)).text()
     ).split(", ");
+    setKeyPhrases(keyPhrases);
 
     const regExp = new RegExp(keyPhrases.join("|"), "gi");
     let match;
@@ -69,7 +71,7 @@ const IndexPage = () => {
         </div>
       </div>
       <div className="flex flex-col bg-purple-50 w-1/2 h-full">
-        <div>
+        <div className="p-2">
           {highlightedTranscript.length ? highlightedTranscript : transcript}
         </div>
         <RecordAudio setTranscript={setTranscript} />
@@ -82,7 +84,11 @@ const IndexPage = () => {
         </div>
         <div className="h-1/2">
           <h2>Highlights:</h2>
-          {/*<div>{highlights}</div>*/}
+          <div>
+            {keyPhrases.map((p) => (
+              <div>{p}</div>
+            ))}
+          </div>
           <button onClick={getHighlights}>get highlights</button>
         </div>
       </div>

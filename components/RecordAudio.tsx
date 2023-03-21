@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, SetStateAction, Dispatch } from "react";
 
-const RecordAudio = () => {
+const RecordAudio = ({ setTranscript }: { setTranscript: Dispatch<SetStateAction<string>> }) => {
   const [recording, setRecording] = useState(false);
   const [audioURL, setAudioURL] = useState("");
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
@@ -53,13 +53,14 @@ const RecordAudio = () => {
           Your browser does not support the audio element.
         </audio>
       )}
-      {audioBlob && <button onClick={() => {
+      {audioBlob && <button onClick={async () => {
         const formData = new FormData();
         formData.append("file", audioBlob);
-        fetch("/api/openai/transcribe", {
+        const r = await (await fetch("/api/openai/transcribe", {
           method: "POST",
           body: formData
-        });
+        })).text();
+        setTranscript(r);
       }
       }>send
       </button>}

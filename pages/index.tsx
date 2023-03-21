@@ -84,7 +84,7 @@ const IndexPage = () => {
         </div>
         <div className="h-1/2">
           <h2>Highlights:</h2>
-          <div>
+          <div className="overflow-auto">
             {keyPhrases.map((p) => (
               <div key={p}>{p}</div>
             ))}

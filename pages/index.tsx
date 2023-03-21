@@ -91,7 +91,11 @@ const IndexPage = () => {
 export default IndexPage;
 
 const exampleTranscript =
-  "Good morning, do you have an appointment? Yes, my name is Jack Smith. Excellent. There you are there. The doctor will be about 10 minutes. Have you been to this practice before? Can you fill in this short form and can I have your Medicare card? Good morning, I'm Dr. Seuss. How are you feeling today? I have been feeling very tired and run down lately. No matter how much I sleep, you get to wake up tired. You don't have the energy for the hobbies you used to enjoy.";
+  "Good morning, do you have an appointment? Yes, my name is Jack Smith. Excellent. " +
+  "There you are there. The doctor will be about 10 minutes. Have you been to this practice before? " +
+  "Can you fill in this short form and can I have your Medicare card? Good morning, I'm Dr. Seuss. " +
+  "How are you feeling today? I have been feeling very tired and run down lately. " +
+  "No matter how much I sleep, you get to wake up tired. You don't have the energy for the hobbies you used to enjoy.";
 const exampleSummary =
   "• Jack Smith has an appointment with Dr. Seuss\n" +
   "• Jack Smith has filled out a form and provided his Medicare card\n" +

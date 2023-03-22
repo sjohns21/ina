@@ -5,7 +5,7 @@ import { CreateCompletionRequest } from "openai";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const obj = { ...defaultObj, ...req.query };
   const response = await openai.createCompletion(obj);
-  res.send(response.data.choices[0].text);
+  res.send(String(response.data.choices[0].text).trim());
 };
 const defaultObj: CreateCompletionRequest = {
   model: "text-davinci-003",

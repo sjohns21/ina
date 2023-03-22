@@ -88,7 +88,7 @@ const IndexPage = () => {
             Get summary
           </Button>
         </div>
-        <div className="h-1/2 flex flex-col justify-between">
+        <div className="h-1/2 flex flex-col justify-between border-t-8">
           <h2 className="text-center">Highlights:</h2>
           <div className="overflow-auto">
             {keyPhrases.map((p) => (

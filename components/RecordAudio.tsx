@@ -53,7 +53,7 @@ const RecordAudio = ({
         onClick={startRecording}
         disabled={recording}
       >
-        Start recording
+        {recording ? "Recording" : "Start recording"}
       </button>
       <button
         className="text-white bg-gray-500 hover:bg-gray-600 rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"

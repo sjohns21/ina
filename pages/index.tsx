@@ -81,14 +81,14 @@ const IndexPage = () => {
         <RecordAudio setTranscript={setTranscript} />
       </div>
       <div className="flex flex-col bg-indigo-50 w-1/2 h-full">
-        <div className="h-1/2 flex flex-col justify-between">
+        <div className="h-1/2 flex flex-col justify-between p-2">
           <h2 className="text-center">Summary:</h2>
           <div className="whitespace-pre-wrap overflow-auto">{summary}</div>
           <Button onClick={getSummary} variant="outlined">
             Get summary
           </Button>
         </div>
-        <div className="h-1/2 flex flex-col justify-between border-t-8">
+        <div className="h-1/2 flex flex-col justify-between border-t-8 p-2">
           <h2 className="text-center">Highlights:</h2>
           <div className="overflow-auto">
             {keyPhrases.map((p) => (

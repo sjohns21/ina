@@ -5,11 +5,12 @@ import Image from "next/image";
 import doctor from "../public/doctor.png";
 import { Button, IconButton } from "@mui/material";
 import { Send, Settings, List } from "@mui/icons-material";
+import Highlight from "@/components/Highlight";
 
 const IndexPage = () => {
   const [transcript, setTranscript] = useState("");
   const [summary, setSummary] = useState("");
-  const [highlights, setHighlights] = useState<string[]>([]);
+  const [highlights, setHighlights] = useState("");
   const [highlightedTranscript, setHighlightedTranscript] = useState<
     React.ReactNode[]
   >([]);
@@ -22,50 +23,14 @@ const IndexPage = () => {
   };
   const getHighlights = async () => {
     const prompt = `The following is a dialogue between a doctor and patient:
-    ${transcript}
-    
-    List the patient's problems. For each problem, list potential causes:
-    `;
+      ${transcript}
+      
+      List the patient's problems. For each problem, list potential causes. 
+      Separate the problem and the potential causes with a colon:`;
     const highlights = await (
       await fetch(encodeURI(`/api/openai/completion?prompt=${prompt}`))
     ).text();
-    setHighlights(highlights.split("\n"));
-  };
-  const getHighlightsKeyWords = async () => {
-    const keyPhrases = (
-      await (await fetch("/api/openai/keywords?text=" + transcript)).text()
-    )
-      .trim()
-      .split(", ");
-    setHighlights(keyPhrases);
-
-    const regExp = new RegExp(keyPhrases.join("|"), "gi");
-    let match;
-    const matches = [];
-    while ((match = regExp.exec(transcript)) !== null) {
-      const start = match.index;
-      const end = regExp.lastIndex;
-      const phrase = match[0];
-      matches.push({ start, end, phrase });
-    }
-    const makeSpan = (s: string, si: number) => (
-      <span key={si} className="bg-yellow-200">
-        {s}
-      </span>
-    );
-    let out: React.ReactNode[] = [];
-    if (matches[0]) {
-      out.push(transcript.substring(0, matches[0].start));
-      for (let mi = 0; mi < matches.length - 1; mi++) {
-        const match = matches[mi];
-        out.push(makeSpan(match.phrase, match.start));
-        out.push(transcript.substring(match.end, matches[mi + 1].start));
-      }
-      const lastMatch = matches[matches.length - 1];
-      out.push(makeSpan(lastMatch.phrase, lastMatch.start));
-      out.push(transcript.substring(lastMatch.end));
-    }
-    setHighlightedTranscript(out);
+    setHighlights(highlights);
   };
 
   return (
@@ -101,9 +66,10 @@ const IndexPage = () => {
         <div className="h-1/2 flex flex-col justify-between border-t-8 p-2">
           <h2 className="text-center">Highlights:</h2>
           <div className="overflow-auto">
-            {highlights.map((h) => (
-              <div key={h}>{h}</div>
-            ))}
+            {highlights.split("\n").map((h, hi) => {
+              const [label, content] = h.split(": ");
+              return <Highlight key={hi} label={label} content={content} />;
+            })}
           </div>
           <Button onClick={getHighlights} variant="outlined">
             Get highlights
@@ -123,8 +89,7 @@ const exampleTranscript0 =
   "How are you feeling today? I have been feeling very tired and run down lately. " +
   "No matter how much I sleep, you get to wake up tired. You don't have the energy for the hobbies you used to enjoy.";
 
-const exampleTranscript1 = `
-Hi Amy, how are you?
+const exampleTranscript1 = `Hi Amy, how are you?
 Hi Dr. Katz. I am pretty good. How about you?
 Doing well, thank you.  Your test results are back.
 Your thyroid hormone levels are quite high. Have you been experiencing any symptoms lately?
@@ -156,3 +121,40 @@ const exampleKeyPhrases = [
 
 const exampleKeyWords =
   "Doctor, Patient, Appointment, Jack Smith, Medicare card, Dr. Seuss, Tired, Run down, Sleep, Energy, Hobbies.";
+
+// const getHighlightsKeyWords = async () => {
+//   const keyPhrases = (
+//     await (await fetch("/api/openai/keywords?text=" + transcript)).text()
+//   )
+//     .trim()
+//     .split(", ");
+//   setHighlights(keyPhrases);
+//
+//   const regExp = new RegExp(keyPhrases.join("|"), "gi");
+//   let match;
+//   const matches = [];
+//   while ((match = regExp.exec(transcript)) !== null) {
+//     const start = match.index;
+//     const end = regExp.lastIndex;
+//     const phrase = match[0];
+//     matches.push({ start, end, phrase });
+//   }
+//   const makeSpan = (s: string, si: number) => (
+//     <span key={si} className="bg-yellow-200">
+//       {s}
+//     </span>
+//   );
+//   let out: React.ReactNode[] = [];
+//   if (matches[0]) {
+//     out.push(transcript.substring(0, matches[0].start));
+//     for (let mi = 0; mi < matches.length - 1; mi++) {
+//       const match = matches[mi];
+//       out.push(makeSpan(match.phrase, match.start));
+//       out.push(transcript.substring(match.end, matches[mi + 1].start));
+//     }
+//     const lastMatch = matches[matches.length - 1];
+//     out.push(makeSpan(lastMatch.phrase, lastMatch.start));
+//     out.push(transcript.substring(lastMatch.end));
+//   }
+//   setHighlightedTranscript(out);
+// };

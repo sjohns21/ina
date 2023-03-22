@@ -74,8 +74,8 @@ const IndexPage = () => {
           </IconButton>
         </div>
       </div>
-      <div className="flex flex-col bg-purple-50 w-1/2 h-full">
-        <div className="p-2">
+      <div className="flex flex-col justify-between bg-purple-50 w-1/2 h-full p-2">
+        <div>
           {highlightedTranscript.length ? highlightedTranscript : transcript}
         </div>
         <RecordAudio setTranscript={setTranscript} />

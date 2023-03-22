@@ -24,7 +24,9 @@ const IndexPage = () => {
   const getHighlights = async () => {
     const keyPhrases = (
       await (await fetch("/api/openai/keywords?text=" + transcript)).text()
-    ).split(", ");
+    )
+      .trim()
+      .split(", ");
     setKeyPhrases(keyPhrases);
 
     const regExp = new RegExp(keyPhrases.join("|"), "gi");

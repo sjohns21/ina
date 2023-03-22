@@ -106,12 +106,25 @@ const IndexPage = () => {
 
 export default IndexPage;
 
-const exampleTranscript =
+const exampleTranscript0 =
   "Good morning, do you have an appointment? Yes, my name is Jack Smith. Excellent. " +
   "There you are there. The doctor will be about 10 minutes. Have you been to this practice before? " +
   "Can you fill in this short form and can I have your Medicare card? Good morning, I'm Dr. Seuss. " +
   "How are you feeling today? I have been feeling very tired and run down lately. " +
   "No matter how much I sleep, you get to wake up tired. You don't have the energy for the hobbies you used to enjoy.";
+
+const exampleTranscript1 = `
+Hi Amy, how are you?
+Hi Dr. Katz. I am pretty good. How about you?
+Doing well, thank you.  Your test results are back.
+Your thyroid hormone levels are quite high. Have you been experiencing any symptoms lately?
+Yes, I have. I've been feeling really anxious and have trouble sleeping at night. I've also lost 10 pounds recently without changing my diet.
+Okay. Have you noticed any other symptoms?
+Well, I've also been feeling a rapid heart beat, even when I'm at rest for a week.
+I see. Have you changed your daily exercise?
+Not really. I am walking more with a few friends. But that is it.
+Ok. Let’s do a quick checkup and see your heart rate.
+`;
 const exampleTranscriptOneLine =
   "Good morning, do you have an appointment? Yes, my name is Jack Smith. Excellent. There you are there. The doctor will be about 10 minutes. Have you been to this practice before? Can you fill in this short form and can I have your Medicare card? Good morning, I'm Dr. Seuss. How are you feeling today? I have been feeling very tired and run down lately. No matter how much I sleep, you get to wake up tired. You don't have the energy for the hobbies you used to enjoy.";
 

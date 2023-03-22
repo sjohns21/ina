@@ -23,7 +23,7 @@ const IndexPage = () => {
   const getHighlights = async () => {
     const prompt = `The following is a dialogue between a doctor and patient:\n${transcript}\n\nList the patient's problems:\n`;
     const highlights = await (
-      await fetch(`/api/openai/completion?prompt=${prompt}`)
+      await fetch(encodeURI(`/api/openai/completion?prompt=${prompt}`))
     ).text();
     setHighlights(highlights.split("\n"));
   };

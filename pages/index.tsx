@@ -3,7 +3,7 @@ import { useState } from "react";
 import React from "react";
 import Image from "next/image";
 import doctor from "../public/doctor.png";
-import { IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { Send, Settings, List } from "@mui/icons-material";
 
 const IndexPage = () => {
@@ -75,7 +75,9 @@ const IndexPage = () => {
           {highlightedTranscript.length ? highlightedTranscript : transcript}
         </div>
         <RecordAudio setTranscript={setTranscript} />
-        <button onClick={getSummary}>Get summary</button>
+        <Button onClick={getSummary} variant="outlined">
+          Get summary
+        </Button>
       </div>
       <div className="flex flex-col bg-indigo-50 w-1/2 h-full">
         <div className="h-1/2">
@@ -89,7 +91,9 @@ const IndexPage = () => {
               <div key={p}>{p}</div>
             ))}
           </div>
-          <button onClick={getHighlights}>get highlights</button>
+          <Button onClick={getHighlights} variant="outlined">
+            Get highlights
+          </Button>
         </div>
       </div>
     </div>

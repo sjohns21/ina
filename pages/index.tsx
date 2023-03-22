@@ -121,18 +121,14 @@ const exampleSummary =
   "• Jack Smith has been feeling very tired and run down, despite getting enough sleep\n" +
   "• Jack Smith has lost energy for hobbies he used to enjoy";
 const exampleKeyPhrases = [
-  "Doctor",
-  "patient",
   "Jack Smith",
-  "appointment",
-  "form",
-  "Medicare card",
   "Dr. Seuss",
-  "tired",
+  "Medicare card",
+  "feeling tired",
   "run down",
-  "sleep",
+  "wake up tired",
   "energy",
-  "hobbies.",
+  "hobbies",
 ];
 
 const exampleKeyWords =

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, SetStateAction, Dispatch } from "react";
+import { Button } from "@mui/material";
 
 const RecordAudio = ({
   setTranscript,
@@ -68,7 +69,7 @@ const RecordAudio = ({
         </audio>
       )}
       {audioBlob && (
-        <button
+        <Button
           onClick={async () => {
             const formData = new FormData();
             formData.append("file", audioBlob);
@@ -80,9 +81,10 @@ const RecordAudio = ({
             ).text();
             setTranscript(r);
           }}
+          variant={"outlined"}
         >
           send
-        </button>
+        </Button>
       )}
     </>
   );

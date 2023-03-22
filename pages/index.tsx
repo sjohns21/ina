@@ -21,7 +21,7 @@ const IndexPage = () => {
     );
   };
   const getHighlights = async () => {
-    const prompt = `The following is a dialogue between a doctor and patient:\n${transcript}\n\nList the patient's problems:\n`;
+    const prompt = `The following is a dialogue between a doctor and patient:\n${transcript}\n\nList the patient's problems. For each problem, list potential causes:\n`;
     const highlights = await (
       await fetch(encodeURI(`/api/openai/completion?prompt=${prompt}`))
     ).text();
@@ -97,8 +97,8 @@ const IndexPage = () => {
         <div className="h-1/2 flex flex-col justify-between border-t-8 p-2">
           <h2 className="text-center">Highlights:</h2>
           <div className="overflow-auto">
-            {highlights.map((p) => (
-              <div key={p}>{p}</div>
+            {highlights.map((h) => (
+              <div key={h}>{h}</div>
             ))}
           </div>
           <Button onClick={getHighlights} variant="outlined">

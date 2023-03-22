@@ -21,7 +21,11 @@ const IndexPage = () => {
     );
   };
   const getHighlights = async () => {
-    const prompt = `The following is a dialogue between a doctor and patient:\n${transcript}\n\nList the patient's problems. For each problem, list potential causes:\n`;
+    const prompt = `The following is a dialogue between a doctor and patient:
+    ${transcript}
+    
+    List the patient's problems. For each problem, list potential causes:
+    `;
     const highlights = await (
       await fetch(encodeURI(`/api/openai/completion?prompt=${prompt}`))
     ).text();

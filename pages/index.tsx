@@ -9,7 +9,7 @@ import { Send, Settings, List } from "@mui/icons-material";
 const IndexPage = () => {
   const [transcript, setTranscript] = useState("");
   const [summary, setSummary] = useState("");
-  const [keyPhrases, setKeyPhrases] = useState<string[]>([]);
+  const [highlights, setHighlights] = useState<string[]>([]);
   const [highlightedTranscript, setHighlightedTranscript] = useState<
     React.ReactNode[]
   >([]);
@@ -20,14 +20,20 @@ const IndexPage = () => {
       ).trim()
     );
   };
-
   const getHighlights = async () => {
+    const prompt = `The following is a dialogue between a doctor and patient:\n${transcript}\n\nList the patient's problems:\n`;
+    const highlights = await (
+      await fetch(`/api/openai/completion?prompt=${prompt}`)
+    ).text();
+    setHighlights(highlights.split("\n"));
+  };
+  const getHighlightsKeyWords = async () => {
     const keyPhrases = (
       await (await fetch("/api/openai/keywords?text=" + transcript)).text()
     )
       .trim()
       .split(", ");
-    setKeyPhrases(keyPhrases);
+    setHighlights(keyPhrases);
 
     const regExp = new RegExp(keyPhrases.join("|"), "gi");
     let match;
@@ -91,7 +97,7 @@ const IndexPage = () => {
         <div className="h-1/2 flex flex-col justify-between border-t-8 p-2">
           <h2 className="text-center">Highlights:</h2>
           <div className="overflow-auto">
-            {keyPhrases.map((p) => (
+            {highlights.map((p) => (
               <div key={p}>{p}</div>
             ))}
           </div>

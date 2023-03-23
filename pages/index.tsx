@@ -28,16 +28,16 @@ const IndexPage = () => {
       ${transcript}
       
       List the patient's problems. 
-      For each problem, list the keywords in the dialogue that indicate it, and list potential causes. 
-      Format each line like: <problem>; <keywords>; <causes>:`;
-    const highlights = await (
+      For each problem, list the quote in the dialogue that indicates it, and list potential causes.
+      Format each line like: <problem>; <quote>; <causes>`;
+    const completion = await (
       await fetch(encodeURI(`/api/openai/completion?prompt=${prompt}`))
     ).text();
     const problemsAndCauses: [string, string][] = [];
     const keywords: string[] = [];
-    highlights.split("\n").forEach((line) => {
-      const [problem, keyword, causes] = line.split("; ");
-      keywords.push(keyword);
+    completion.split("\n").forEach((line) => {
+      const [problem, quote, causes] = line.split("; ");
+      keywords.push(quote.slice(1, -1));
       problemsAndCauses.push([problem, causes]);
     });
     setProblemsAndCauses(problemsAndCauses);

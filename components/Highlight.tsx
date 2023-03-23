@@ -9,9 +9,11 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 export default function Highlight({
   label,
   content,
+  highlight,
 }: {
   label: string;
   content: string;
+  highlight: string;
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -20,7 +22,7 @@ export default function Highlight({
   };
 
   return (
-    <List>
+    <List sx={{ background: highlight }}>
       <ListItemButton onClick={handleClick}>
         <ListItemText primary={label} />
         {open ? <ExpandLess /> : <ExpandMore />}

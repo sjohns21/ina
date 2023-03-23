@@ -16,6 +16,7 @@ const IndexPage = () => {
   const [highlightedTranscript, setHighlightedTranscript] = useState<
     React.ReactNode[]
   >([]);
+  const [highlights, setHighlights] = useState<string[]>([]);
   const getSummary = async () => {
     setSummary(
       (
@@ -53,24 +54,30 @@ const IndexPage = () => {
       const phrase = match[0];
       matches.push({ start, end, phrase });
     }
-    const makeSpan = (s: string, si: number) => (
-      <span key={si} className="bg-yellow-200">
+    const makeSpan = (s: string, si: number, highlight: string) => (
+      <span key={si} style={{ background: highlight }}>
         {s}
       </span>
     );
     let out: React.ReactNode[] = [];
+    const highlights = [];
     if (matches[0]) {
       out.push(transcript.substring(0, matches[0].start));
       for (let mi = 0; mi < matches.length - 1; mi++) {
         const match = matches[mi];
-        out.push(makeSpan(match.phrase, match.start));
+        const highlight = generateRandomHighlight();
+        highlights.push(highlight);
+        out.push(makeSpan(match.phrase, match.start, highlight));
         out.push(transcript.substring(match.end, matches[mi + 1].start));
       }
       const lastMatch = matches[matches.length - 1];
-      out.push(makeSpan(lastMatch.phrase, lastMatch.start));
+      const highlight = generateRandomHighlight();
+      highlights.push(highlight);
+      out.push(makeSpan(lastMatch.phrase, lastMatch.start, highlight));
       out.push(transcript.substring(lastMatch.end));
     }
     setHighlightedTranscript(out);
+    setHighlights(highlights);
   };
 
   return (
@@ -112,6 +119,7 @@ const IndexPage = () => {
                   key={i}
                   label={pc[0]}
                   content={`Potential causes: ${pc[1]}`}
+                  highlight={highlights[i]}
                 />
               );
             })}
@@ -166,3 +174,10 @@ const exampleKeyPhrases = [
 
 const exampleKeyWords =
   "Doctor, Patient, Appointment, Jack Smith, Medicare card, Dr. Seuss, Tired, Run down, Sleep, Energy, Hobbies.";
+
+function generateRandomHighlight(): string {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgb(${r}, ${g}, ${b}, 0.5)`;
+}

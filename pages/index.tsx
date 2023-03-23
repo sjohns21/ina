@@ -85,6 +85,12 @@ const IndexPage = () => {
       <div className="flex flex-col bg-indigo-200 w-2/12 h-full items-center justify-between">
         <Image src={doctor} alt={"doctor"} width={120} />
         <div className="flex flex-col">
+          <Button onClick={() => setTranscript(exampleTranscript0)}>
+            Example transcript 0
+          </Button>
+          <Button onClick={() => setTranscript(exampleTranscript1)}>
+            Example transcript 1
+          </Button>
           <IconButton aria-label="send">
             <Send />
           </IconButton>

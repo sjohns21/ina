@@ -33,14 +33,15 @@ const IndexPage = () => {
     const highlights = await (
       await fetch(encodeURI(`/api/openai/completion?prompt=${prompt}`))
     ).text();
-    const keywords = [];
     const problemsAndCauses: [string, string][] = [];
+    const keywords: string[] = [];
     highlights.split("\n").forEach((line) => {
       const [problem, keyword, causes] = line.split("; ");
       keywords.push(keyword);
       problemsAndCauses.push([problem, causes]);
     });
     setProblemsAndCauses(problemsAndCauses);
+    await getHighlightsKeyWords(keywords);
   };
   const getHighlightsKeyWords = async (keyPhrases: string[]) => {
     const regExp = new RegExp(keyPhrases.join("|"), "gi");

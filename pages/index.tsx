@@ -68,7 +68,13 @@ const IndexPage = () => {
           <div className="overflow-auto">
             {highlights.split("\n").map((h, hi) => {
               const [label, content] = h.split(": ");
-              return <Highlight key={hi} label={label} content={content} />;
+              return (
+                <Highlight
+                  key={hi}
+                  label={label}
+                  content={`Potential causes: ${content}`}
+                />
+              );
             })}
           </div>
           <Button onClick={getHighlights} variant="outlined">

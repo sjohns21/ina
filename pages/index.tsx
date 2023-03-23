@@ -10,7 +10,9 @@ import Highlight from "@/components/Highlight";
 const IndexPage = () => {
   const [transcript, setTranscript] = useState("");
   const [summary, setSummary] = useState("");
-  const [highlights, setHighlights] = useState("");
+  const [problemsAndCauses, setProblemsAndCauses] = useState<
+    [string, string][]
+  >([]);
   const [highlightedTranscript, setHighlightedTranscript] = useState<
     React.ReactNode[]
   >([]);
@@ -25,12 +27,49 @@ const IndexPage = () => {
     const prompt = `The following is a dialogue between a doctor and patient:
       ${transcript}
       
-      List the patient's problems. For each problem, list potential causes. 
-      Separate the problem and the potential causes with a colon:`;
+      List the patient's problems. 
+      For each problem, list the keywords in the dialogue that indicate it, and list potential causes. 
+      Format each line like: <problem>; <keywords>; <causes>:`;
     const highlights = await (
       await fetch(encodeURI(`/api/openai/completion?prompt=${prompt}`))
     ).text();
-    setHighlights(highlights);
+    const keywords = [];
+    const problemsAndCauses: [string, string][] = [];
+    highlights.split("\n").forEach((line) => {
+      const [problem, keyword, causes] = line.split("; ");
+      keywords.push(keyword);
+      problemsAndCauses.push([problem, causes]);
+    });
+    setProblemsAndCauses(problemsAndCauses);
+  };
+  const getHighlightsKeyWords = async (keyPhrases: string[]) => {
+    const regExp = new RegExp(keyPhrases.join("|"), "gi");
+    let match;
+    const matches = [];
+    while ((match = regExp.exec(transcript)) !== null) {
+      const start = match.index;
+      const end = regExp.lastIndex;
+      const phrase = match[0];
+      matches.push({ start, end, phrase });
+    }
+    const makeSpan = (s: string, si: number) => (
+      <span key={si} className="bg-yellow-200">
+        {s}
+      </span>
+    );
+    let out: React.ReactNode[] = [];
+    if (matches[0]) {
+      out.push(transcript.substring(0, matches[0].start));
+      for (let mi = 0; mi < matches.length - 1; mi++) {
+        const match = matches[mi];
+        out.push(makeSpan(match.phrase, match.start));
+        out.push(transcript.substring(match.end, matches[mi + 1].start));
+      }
+      const lastMatch = matches[matches.length - 1];
+      out.push(makeSpan(lastMatch.phrase, lastMatch.start));
+      out.push(transcript.substring(lastMatch.end));
+    }
+    setHighlightedTranscript(out);
   };
 
   return (
@@ -66,13 +105,12 @@ const IndexPage = () => {
         <div className="h-1/2 flex flex-col justify-between border-t-8 p-2">
           <h2 className="text-center">Highlights:</h2>
           <div className="overflow-auto">
-            {highlights.split("\n").map((h, hi) => {
-              const [label, content] = h.split(": ");
+            {problemsAndCauses.map((pc, i) => {
               return (
                 <Highlight
-                  key={hi}
-                  label={label}
-                  content={`Potential causes: ${content}`}
+                  key={i}
+                  label={pc[0]}
+                  content={`Potential causes: ${pc[1]}`}
                 />
               );
             })}
@@ -127,40 +165,3 @@ const exampleKeyPhrases = [
 
 const exampleKeyWords =
   "Doctor, Patient, Appointment, Jack Smith, Medicare card, Dr. Seuss, Tired, Run down, Sleep, Energy, Hobbies.";
-
-// const getHighlightsKeyWords = async () => {
-//   const keyPhrases = (
-//     await (await fetch("/api/openai/keywords?text=" + transcript)).text()
-//   )
-//     .trim()
-//     .split(", ");
-//   setHighlights(keyPhrases);
-//
-//   const regExp = new RegExp(keyPhrases.join("|"), "gi");
-//   let match;
-//   const matches = [];
-//   while ((match = regExp.exec(transcript)) !== null) {
-//     const start = match.index;
-//     const end = regExp.lastIndex;
-//     const phrase = match[0];
-//     matches.push({ start, end, phrase });
-//   }
-//   const makeSpan = (s: string, si: number) => (
-//     <span key={si} className="bg-yellow-200">
-//       {s}
-//     </span>
-//   );
-//   let out: React.ReactNode[] = [];
-//   if (matches[0]) {
-//     out.push(transcript.substring(0, matches[0].start));
-//     for (let mi = 0; mi < matches.length - 1; mi++) {
-//       const match = matches[mi];
-//       out.push(makeSpan(match.phrase, match.start));
-//       out.push(transcript.substring(match.end, matches[mi + 1].start));
-//     }
-//     const lastMatch = matches[matches.length - 1];
-//     out.push(makeSpan(lastMatch.phrase, lastMatch.start));
-//     out.push(transcript.substring(lastMatch.end));
-//   }
-//   setHighlightedTranscript(out);
-// };

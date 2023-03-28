@@ -9,10 +9,12 @@ const VirtualConversationPage = (props: Props) => {
   const router = useRouter();
   const [character, setCharacter] = useState("");
   const [characterSet, setCharacterSet] = useState(false);
+
   useEffect(() => {
     if (router.query.with)
       setCharacter(String(router.query.with).replaceAll("_", " "));
-  }, [router.query.with]);
+  }, [router.query]);
+
   return (
     <Layout title="Virtual Conversation">
       Have a virtual conversation with an AI copy of:

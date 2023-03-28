@@ -11,9 +11,10 @@ const VirtualConversationPage = (props: Props) => {
   const [characterSet, setCharacterSet] = useState(false);
 
   useEffect(() => {
-    if (router.query.with)
+    if (router.query.with) {
       setCharacter(String(router.query.with).replaceAll("_", " "));
-  }, [router.query]);
+    }
+  }, [router.isReady]);
 
   return (
     <Layout title="Virtual Conversation">

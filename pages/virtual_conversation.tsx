@@ -15,6 +15,14 @@ const VirtualConversationPage = (props: Props) => {
       setCharacter(String(router.query.with).replaceAll("_", " "));
     }
   }, [router.isReady]);
+  useEffect(() => {
+    if (character)
+      router.push({
+        query: {
+          with: character.replaceAll(" ", "_"),
+        },
+      });
+  }, [character]);
 
   return (
     <Layout title="Virtual Conversation">

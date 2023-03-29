@@ -13,7 +13,11 @@ if (typeof window !== "undefined") {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://app.posthog.com",
     // Disable in development
     loaded: (posthog) => {
-      if (process.env.NODE_ENV === "development") posthog.opt_out_capturing();
+      if (
+        process.env.NODE_ENV === "development" ||
+        localStorage.getItem("postHogIgnore")
+      )
+        posthog.opt_out_capturing();
     },
   });
 }

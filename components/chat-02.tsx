@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Layout from "@/components/Layout";
 import Box from "@mui/material/Box";
 import { CircularProgress, IconButton, Input } from "@mui/material";
@@ -19,6 +19,12 @@ export const Chat02 = ({
   const [addition, setAddition] = useState("");
   const [loading, setLoading] = useState(false);
   const rows = useMemo(() => thread.split("\n").slice(2), [thread]);
+  const threadRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!threadRef.current) return;
+    // Scroll to the bottom of the thread when new messages are added
+    threadRef.current.scrollTop = threadRef.current.scrollHeight;
+  }, [thread]);
   useEffect(() => {
     send();
   }, []);
@@ -38,7 +44,7 @@ export const Chat02 = ({
   };
   return (
     <div className={"flex flex-col overflow-auto"} style={{ height: "80vh" }}>
-      <div className={"overflow-auto"}>
+      <div className={"overflow-auto"} ref={threadRef}>
         {rows.map((row, i) => (
           <div
             key={i}

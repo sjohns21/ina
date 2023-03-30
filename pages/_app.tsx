@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import { CssBaseline } from "@mui/material";
+import type {} from "@mui/lab/themeAugmentation";
 import { Analytics } from "@vercel/analytics/react";
 import "../globals.css";
 import { useEffect } from "react";

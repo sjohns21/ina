@@ -36,12 +36,17 @@ export const Chat02 = ({
     setLoading(false);
   };
   return (
-    <Layout title="Chat Plus">
-      {rows.map((row, i) => (
-        <div key={i} style={{ background: i % 2 == 0 ? "white" : "lightgray" }}>
-          {row}
-        </div>
-      ))}
+    <div className={"flex flex-col"}>
+      <div>
+        {rows.map((row, i) => (
+          <div
+            key={i}
+            style={{ background: i % 2 == 0 ? "white" : "lightgray" }}
+          >
+            {row}
+          </div>
+        ))}
+      </div>
       <Box sx={{ display: "flex" }}>
         <Input
           value={addition}
@@ -58,6 +63,6 @@ export const Chat02 = ({
           </IconButton>
         )}
       </Box>
-    </Layout>
+    </div>
   );
 };

@@ -36,8 +36,8 @@ export const Chat02 = ({
     setLoading(false);
   };
   return (
-    <div className={"flex flex-col"}>
-      <div>
+    <div className={"flex flex-col overflow-auto"} style={{ height: "80vh" }}>
+      <div className={"overflow-auto"}>
         {rows.map((row, i) => (
           <div
             key={i}

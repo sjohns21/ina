@@ -3,6 +3,7 @@ import Layout from "@/components/Layout";
 import Box from "@mui/material/Box";
 import { CircularProgress, IconButton, Input } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import { LoadingButton } from "@mui/lab";
 
 const fetcher = (
   ...args: [input: RequestInfo | URL, init?: RequestInit | undefined]
@@ -55,13 +56,9 @@ export const Chat02 = ({
           onKeyDown={(e) => e.key === "Enter" && send()}
           disabled={loading}
         />
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          <IconButton aria-label="send" onClick={send}>
-            <SendIcon />
-          </IconButton>
-        )}
+        <LoadingButton onClick={send} loading={loading} variant="contained">
+          <span>Submit</span>
+        </LoadingButton>
       </Box>
     </div>
   );

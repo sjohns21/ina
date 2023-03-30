@@ -1,8 +1,8 @@
 import type { AppProps } from "next/app";
-import { CssBaseline } from "@mui/material";
-import type {} from "@mui/lab/themeAugmentation";
 import { Analytics } from "@vercel/analytics/react";
 import "../globals.css";
+import { CssBaseline } from "@mui/material";
+import type {} from "@mui/lab/themeAugmentation";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import posthog from "posthog-js";

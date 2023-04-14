@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import Layout from "@/components/Layout";
 import Box from "@mui/material/Box";
-import { CircularProgress, IconButton, Input } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+import { Input } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
 const fetcher = (

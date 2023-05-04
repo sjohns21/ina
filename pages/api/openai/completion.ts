@@ -4,6 +4,7 @@ import { CreateCompletionRequest } from "openai";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const obj = { ...defaultObj, ...req.query };
+  obj.temperature = Number(obj.temperature);
   const response = await openai.createCompletion(obj);
   res.send(String(response.data.choices[0].text).trim());
 };

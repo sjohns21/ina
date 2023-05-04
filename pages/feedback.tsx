@@ -4,8 +4,8 @@ import { useState } from "react";
 type Props = {};
 const TutorPage = (props: Props) => {
   const [raw, setRaw] = useState(defaultRaw);
-  const [x3, setX3] = useState<string[]>([]);
-  const [x9, setX9] = useState<string[]>([]);
+  const [x3, setX3] = useState<string[]>(defaultX3);
+  const [x9, setX9] = useState<string[]>(defaultX9);
   return (
     <Layout title="Feedback">
       <h1>Feedback</h1>
@@ -107,5 +107,14 @@ const defaultRaw = [
   "The checkout process was seamless and secure. I appreciate the extra security measures to protect my personal information.",
 
   "I had a great experience using this app overall. I would definitely recommend it to others looking for health products online.",
+];
+const defaultX3 = [
+  "This app makes finding and comparing health products easy and convenient. It has a user-friendly interface and offers a wide variety of products to choose from.",
+  "The customer service team was highly responsive and helpful when I had an issue with my order. The app provides personalized recommendations based on health needs and preferences but could benefit from more detailed product descriptions and reviews to give customers more information when making decisions.",
+  "This user had a great experience using the app to purchase health products online. They appreciated the secure checkout process and the extra security measures, but wished there were more options for filtering and sorting products. They would recommend the app to others looking for health products.",
+];
+
+const defaultX9 = [
+  "This app offers an easy and user-friendly interface to compare and purchase different health products. It provides a wide selection and personalized recommendations tailored to the user's health needs. The customer service team is also helpful and responsive. The app could benefit from more product descriptions, reviews, and filtering and sorting options. The checkout process is secure and seamless. Overall, it is a great experience and highly recommended.",
 ];
 export default TutorPage;

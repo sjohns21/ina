@@ -5,6 +5,7 @@ type Props = {};
 const TutorPage = (props: Props) => {
   const [raw, setRaw] = useState(defaultRaw);
   const [x3, setX3] = useState<string[]>([]);
+  const [x9, setX9] = useState<string[]>([]);
   return (
     <Layout title="Feedback">
       <h1>Feedback</h1>
@@ -42,7 +43,7 @@ const TutorPage = (props: Props) => {
               }
             }}
           >
-            button
+            summarize
           </button>
           {x3.map((r, ri) => (
             <div key={ri} className={"m-4"}>
@@ -52,6 +53,36 @@ const TutorPage = (props: Props) => {
         </div>
         <div className={"w-1/3"}>
           <h2>summarized x 9</h2>
+          <button
+            onClick={async () => {
+              const chunkSize = 9;
+              for (let i = 0; i < raw.length / chunkSize; i++) {
+                const chunk = raw
+                  .slice(i * chunkSize, i * chunkSize + chunkSize)
+                  .join("\n");
+                const prompt = `Summarize this:\n\n${chunk}`;
+                const completion = await (
+                  await fetch(
+                    encodeURI(
+                      `/api/openai/completion?temperature=.7&prompt=${prompt}`
+                    )
+                  )
+                ).text();
+                setX9((prev) => {
+                  const next = [...prev];
+                  next[i] = completion;
+                  return next;
+                });
+              }
+            }}
+          >
+            summarize
+          </button>
+          {x9.map((r, ri) => (
+            <div key={ri} className={"m-4"}>
+              "{r}"
+            </div>
+          ))}
         </div>
       </div>
     </Layout>

@@ -9,6 +9,7 @@ const TutorPage = (props: Props) => {
   return (
     <Layout title="Feedback">
       <h1>Feedback</h1>
+      <button onClick={() => (setRaw([]), setX3([]), setX9([]))}>reset</button>
       <div className={"flex"}>
         <div className={"w-1/3"}>
           <h2>raw</h2>

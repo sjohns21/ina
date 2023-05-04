@@ -15,9 +15,8 @@ const FeedbackSummarizerPage = (props: Props) => {
         <div className={"w-1/3"}>
           <h2>raw</h2>
           {raw.map((r, ri) => (
-            <div>
+            <div key={ri}>
               <TextareaAutosize
-                key={ri}
                 className={"m-2 w-3/4"}
                 value={r}
                 onChange={(e) =>

@@ -20,7 +20,9 @@ const CopilotForDoctors = () => {
   const getSummary = async () => {
     setSummary(
       (
-        await (await fetch("/api/openai/summarize?text=" + transcript)).text()
+        await (
+          await fetch("/api/openai/doctor-summarize?text=" + transcript)
+        ).text()
       ).trim()
     );
   };

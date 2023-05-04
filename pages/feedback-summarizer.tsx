@@ -10,7 +10,9 @@ const FeedbackSummarizerPage = (props: Props) => {
   return (
     <Layout title="Feedback Summarizer">
       <h1>Feedback Summarizer</h1>
-      <button onClick={() => (setRaw([]), setX3([]), setX9([]))}>reset</button>
+      <button onClick={() => (setRaw([""]), setX3([]), setX9([]))}>
+        reset
+      </button>
       <div className={"flex"}>
         <div className={"w-1/3"}>
           <h2>raw</h2>
@@ -29,6 +31,17 @@ const FeedbackSummarizerPage = (props: Props) => {
               />
             </div>
           ))}
+          <button
+            onClick={() =>
+              setRaw((prev) => {
+                const next = [...prev];
+                next[next.length] = "";
+                return next;
+              })
+            }
+          >
+            add
+          </button>
         </div>
         <div className={"w-1/3"}>
           <h2>summarized x 3</h2>

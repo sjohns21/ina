@@ -2,13 +2,13 @@ import Layout from "@/components/Layout";
 import { useState } from "react";
 
 type Props = {};
-const TutorPage = (props: Props) => {
+const FeedbackSummarizerPage = (props: Props) => {
   const [raw, setRaw] = useState(defaultRaw);
   const [x3, setX3] = useState<string[]>(defaultX3);
   const [x9, setX9] = useState<string[]>(defaultX9);
   return (
-    <Layout title="Feedback">
-      <h1>Feedback</h1>
+    <Layout title="Feedback Summarizer">
+      <h1>Feedback Summarizer</h1>
       <button onClick={() => (setRaw([]), setX3([]), setX9([]))}>reset</button>
       <div className={"flex"}>
         <div className={"w-1/3"}>
@@ -118,4 +118,4 @@ const defaultX3 = [
 const defaultX9 = [
   "This app offers an easy and user-friendly interface to compare and purchase different health products. It provides a wide selection and personalized recommendations tailored to the user's health needs. The customer service team is also helpful and responsive. The app could benefit from more product descriptions, reviews, and filtering and sorting options. The checkout process is secure and seamless. Overall, it is a great experience and highly recommended.",
 ];
-export default TutorPage;
+export default FeedbackSummarizerPage;

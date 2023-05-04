@@ -22,7 +22,7 @@ const TutorPage = (props: Props) => {
           <button
             onClick={async () => {
               const chunkSize = 3;
-              for (let i = 0; i < 3; i++) {
+              for (let i = 0; i < raw.length / chunkSize; i++) {
                 const chunk = raw
                   .slice(i * chunkSize, i * chunkSize + chunkSize)
                   .join("\n");
@@ -45,7 +45,7 @@ const TutorPage = (props: Props) => {
             button
           </button>
           {x3.map((r, ri) => (
-            <div key={ri} className={"m-2"}>
+            <div key={ri} className={"m-4"}>
               "{r}"
             </div>
           ))}

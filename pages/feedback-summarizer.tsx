@@ -59,7 +59,7 @@ const FeedbackSummarizerPage = (props: Props) => {
           </button>
           {x3.map((r, ri) => (
             <div key={ri} className={"m-4"}>
-              "{r}"
+              {r}
             </div>
           ))}
         </div>
@@ -92,7 +92,7 @@ const FeedbackSummarizerPage = (props: Props) => {
           </button>
           {x9.map((r, ri) => (
             <div key={ri} className={"m-4"}>
-              "{r}"
+              {r}
             </div>
           ))}
         </div>

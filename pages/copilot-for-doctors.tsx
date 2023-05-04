@@ -7,7 +7,7 @@ import { Button, IconButton } from "@mui/material";
 import { Send, Settings, List } from "@mui/icons-material";
 import Highlight from "@/components/Highlight";
 
-const IndexPage = () => {
+const CopilotForDoctors = () => {
   const [transcript, setTranscript] = useState("");
   const [summary, setSummary] = useState("");
   const [problemsAndCauses, setProblemsAndCauses] = useState<
@@ -139,7 +139,7 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default CopilotForDoctors;
 
 const exampleTranscript0 =
   "Good morning, do you have an appointment? Yes, my name is Jack Smith. Excellent. " +

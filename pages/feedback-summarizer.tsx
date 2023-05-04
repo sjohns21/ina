@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import { useState } from "react";
+import { TextareaAutosize } from "@mui/material";
 
 type Props = {};
 const FeedbackSummarizerPage = (props: Props) => {
@@ -14,8 +15,19 @@ const FeedbackSummarizerPage = (props: Props) => {
         <div className={"w-1/3"}>
           <h2>raw</h2>
           {raw.map((r, ri) => (
-            <div key={ri} className={"m-2"}>
-              "{r}"
+            <div>
+              <TextareaAutosize
+                key={ri}
+                className={"m-2 w-3/4"}
+                value={r}
+                onChange={(e) =>
+                  setRaw((prev) => {
+                    const next = [...prev];
+                    next[ri] = e.target.value;
+                    return next;
+                  })
+                }
+              />
             </div>
           ))}
         </div>

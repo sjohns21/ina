@@ -49,7 +49,7 @@ const FeedbackAnalyzerPage = (props: Props) => {
                 const prompt = `
                   User feedback: ${rawItem}
     
-                  Is the user feedback a po? (Yes/No):`;
+                  Is the user feedback useful? (Yes/No):`;
                 const completion = await (
                   await fetch(
                     encodeURI(`/api/openai/completion?prompt=${prompt}`)

@@ -53,7 +53,9 @@ const FeedbackAnalyzerPage = (props: Props) => {
                   Is the user feedback useful? (Yes/No):`;
                 const completion = await (
                   await fetch(
-                    encodeURI(`/api/openai/completion?prompt=${prompt}`)
+                    encodeURI(
+                      `/api/openai/completion?temperature=0&prompt=${prompt}`
+                    )
                   )
                 ).text();
                 if (completion.includes("Yes")) useful.push(rawItem);
@@ -81,7 +83,9 @@ const FeedbackAnalyzerPage = (props: Props) => {
                   Does the user feedback indicate a problem? (Yes/No):`;
                 const completion = await (
                   await fetch(
-                    encodeURI(`/api/openai/completion?prompt=${prompt}`)
+                    encodeURI(
+                      `/api/openai/completion?temperature=0&prompt=${prompt}`
+                    )
                   )
                 ).text();
                 if (completion.includes("Yes")) problems.push(item);
@@ -110,4 +114,5 @@ const defaultUseful = [
   "Does my health insurance cover this service?",
   "I love how easy it is to find and compare different health products on this app. It saves me so much time and effort!",
 ];
+const defaultProblems = ["Does my health insurance cover this service?"];
 export default FeedbackAnalyzerPage;

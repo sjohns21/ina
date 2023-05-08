@@ -16,7 +16,7 @@ const FeedbackAnalyzerPage = (props: Props) => {
       <span className={"m-1"}>{loading ? "loading" : ""}</span>
       <div className={"flex"}>
         <div className={"w-1/3"}>
-          <h2>raw feedback</h2>
+          <h2>user feedback</h2>
           {raw.map((r, ri) => (
             <div key={ri}>
               <TextareaAutosize

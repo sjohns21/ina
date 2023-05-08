@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 const defaultObj: CreateCompletionRequest = {
   model: "text-davinci-003",
   prompt: "",
-  temperature: 0,
+  temperature: 0.7,
   max_tokens: 256,
   top_p: 1,
   frequency_penalty: 0,

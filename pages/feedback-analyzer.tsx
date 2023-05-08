@@ -7,6 +7,7 @@ const FeedbackAnalyzerPage = (props: Props) => {
   const [raw, setRaw] = useState(defaultRaw);
   const [useful, setUseful] = useState<string[]>(defaultUseful);
   const [problems, setProblems] = useState<string[]>([]);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
   return (
     <Layout title="Feedback Analyzer">
       <h1>Feedback Analyzer</h1>
@@ -96,6 +97,35 @@ const FeedbackAnalyzerPage = (props: Props) => {
             find problems
           </button>
           {problems.map((item, index) => (
+            <div key={index} className={"m-4"}>
+              {item}
+            </div>
+          ))}
+        </div>
+        <div className={"w-1/3"}>
+          <h2>suggest solutions</h2>
+          <button
+            onClick={async () => {
+              const suggestions = [];
+              for (const item of problems) {
+                const prompt = `
+                I'm creating a web business application.
+                Problem: users are saying "${item}"
+                
+                How can this be solved?`;
+                const completion = await (
+                  await fetch(
+                    encodeURI(`/api/openai/completion?prompt=${prompt}`)
+                  )
+                ).text();
+                suggestions.push(completion);
+              }
+              setSuggestions(suggestions);
+            }}
+          >
+            suggest solutions
+          </button>
+          {suggestions.map((item, index) => (
             <div key={index} className={"m-4"}>
               {item}
             </div>

@@ -44,101 +44,107 @@ const FeedbackAnalyzerPage = (props: Props) => {
             add
           </button>
         </div>
-        <div className={"w-1/3"}>
-          <h2>filter useful</h2>
-          <button
-            onClick={async () => {
-              setLoading(true);
-              const useful = [];
-              for (const rawItem of raw) {
-                const prompt = `
+        {raw.length > 0 && (
+          <div className={"w-1/3"}>
+            <h2>filter useful</h2>
+            <button
+              onClick={async () => {
+                setLoading(true);
+                const useful = [];
+                for (const rawItem of raw) {
+                  const prompt = `
                   User feedback: ${rawItem}
     
                   Is the user feedback useful? (Yes/No):`;
-                const completion = await (
-                  await fetch(
-                    encodeURI(
-                      `/api/openai/completion?temperature=0&prompt=${prompt}`
+                  const completion = await (
+                    await fetch(
+                      encodeURI(
+                        `/api/openai/completion?temperature=0&prompt=${prompt}`
+                      )
                     )
-                  )
-                ).text();
-                if (completion.includes("Yes")) useful.push(rawItem);
-              }
-              setUseful(useful);
-              setLoading(false);
-            }}
-          >
-            filter useful
-          </button>
-          {useful.map((r, ri) => (
-            <div key={ri} className={"m-4"}>
-              {r}
-            </div>
-          ))}
-        </div>
-        <div className={"w-1/3"}>
-          <h2>find problems</h2>
-          <button
-            onClick={async () => {
-              setLoading(true);
-              const problems = [];
-              for (const item of useful) {
-                const prompt = `
+                  ).text();
+                  if (completion.includes("Yes")) useful.push(rawItem);
+                }
+                setUseful(useful);
+                setLoading(false);
+              }}
+            >
+              filter useful
+            </button>
+            {useful.map((r, ri) => (
+              <div key={ri} className={"m-4"}>
+                {r}
+              </div>
+            ))}
+          </div>
+        )}
+        {useful.length > 0 && (
+          <div className={"w-1/3"}>
+            <h2>find problems</h2>
+            <button
+              onClick={async () => {
+                setLoading(true);
+                const problems = [];
+                for (const item of useful) {
+                  const prompt = `
                   User feedback: ${item}
     
                   Does the user feedback indicate a problem? (Yes/No):`;
-                const completion = await (
-                  await fetch(
-                    encodeURI(
-                      `/api/openai/completion?temperature=0&prompt=${prompt}`
+                  const completion = await (
+                    await fetch(
+                      encodeURI(
+                        `/api/openai/completion?temperature=0&prompt=${prompt}`
+                      )
                     )
-                  )
-                ).text();
-                if (completion.includes("Yes")) problems.push(item);
-              }
-              setProblems(problems);
-              setLoading(false);
-            }}
-          >
-            find problems
-          </button>
-          {problems.map((item, index) => (
-            <div key={index} className={"m-4"}>
-              {item}
-            </div>
-          ))}
-        </div>
-        <div className={"w-1/3"}>
-          <h2>suggest solutions</h2>
-          <button
-            onClick={async () => {
-              setLoading(true);
-              const suggestions = [];
-              for (const item of problems) {
-                const prompt = `
+                  ).text();
+                  if (completion.includes("Yes")) problems.push(item);
+                }
+                setProblems(problems);
+                setLoading(false);
+              }}
+            >
+              find problems
+            </button>
+            {problems.map((item, index) => (
+              <div key={index} className={"m-4"}>
+                {item}
+              </div>
+            ))}
+          </div>
+        )}
+        {problems.length > 0 && (
+          <div className={"w-1/3"}>
+            <h2>suggest solutions</h2>
+            <button
+              onClick={async () => {
+                setLoading(true);
+                const suggestions = [];
+                for (const item of problems) {
+                  const prompt = `
                 I'm creating a web business application.
                 Problem: users are saying "${item}"
                 
                 How can this be solved?`;
-                const completion = await (
-                  await fetch(
-                    encodeURI(`/api/openai/completion?prompt=${prompt}`)
-                  )
-                ).text();
-                suggestions.push(completion);
-              }
-              setSuggestions(suggestions);
-              setLoading(false);
-            }}
-          >
-            suggest solutions
-          </button>
-          {suggestions.map((item, index) => (
-            <div key={index} className={"m-4"}>
-              {item}
-            </div>
-          ))}
-        </div>
+                  const completion = await (
+                    await fetch(
+                      encodeURI(`/api/openai/completion?prompt=${prompt}`)
+                    )
+                  ).text();
+                  suggestions.push(completion);
+                }
+                setSuggestions(suggestions);
+                setLoading(false);
+              }}
+            >
+              suggest solutions
+            </button>
+            {suggestions.map((item, index) => (
+              <div key={index} className={"m-4"}>
+                {item}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </Layout>
   );

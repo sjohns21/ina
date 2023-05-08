@@ -5,13 +5,15 @@ import { TextareaAutosize } from "@mui/material";
 type Props = {};
 const FeedbackAnalyzerPage = (props: Props) => {
   const [raw, setRaw] = useState(defaultRaw);
-  const [useful, setUseful] = useState<string[]>(defaultUseful);
+  const [useful, setUseful] = useState<string[]>([]);
   const [problems, setProblems] = useState<string[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
   return (
     <Layout title="Feedback Analyzer">
       <h1>Feedback Analyzer</h1>
       <button onClick={() => (setRaw([""]), setUseful([]))}>reset</button>
+      <span className={"m-1"}>{loading ? "loading" : ""}</span>
       <div className={"flex"}>
         <div className={"w-1/3"}>
           <h2>raw feedback</h2>
@@ -46,6 +48,7 @@ const FeedbackAnalyzerPage = (props: Props) => {
           <h2>filter useful</h2>
           <button
             onClick={async () => {
+              setLoading(true);
               const useful = [];
               for (const rawItem of raw) {
                 const prompt = `
@@ -62,6 +65,7 @@ const FeedbackAnalyzerPage = (props: Props) => {
                 if (completion.includes("Yes")) useful.push(rawItem);
               }
               setUseful(useful);
+              setLoading(false);
             }}
           >
             filter useful
@@ -76,6 +80,7 @@ const FeedbackAnalyzerPage = (props: Props) => {
           <h2>find problems</h2>
           <button
             onClick={async () => {
+              setLoading(true);
               const problems = [];
               for (const item of useful) {
                 const prompt = `
@@ -92,6 +97,7 @@ const FeedbackAnalyzerPage = (props: Props) => {
                 if (completion.includes("Yes")) problems.push(item);
               }
               setProblems(problems);
+              setLoading(false);
             }}
           >
             find problems
@@ -106,6 +112,7 @@ const FeedbackAnalyzerPage = (props: Props) => {
           <h2>suggest solutions</h2>
           <button
             onClick={async () => {
+              setLoading(true);
               const suggestions = [];
               for (const item of problems) {
                 const prompt = `
@@ -121,6 +128,7 @@ const FeedbackAnalyzerPage = (props: Props) => {
                 suggestions.push(completion);
               }
               setSuggestions(suggestions);
+              setLoading(false);
             }}
           >
             suggest solutions

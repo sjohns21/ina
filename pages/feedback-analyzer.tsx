@@ -5,14 +5,14 @@ import { TextareaAutosize } from "@mui/material";
 type Props = {};
 const FeedbackAnalyzerPage = (props: Props) => {
   const [raw, setRaw] = useState(defaultRaw);
-  const [useful, setUseful] = useState<string[]>([]);
+  const [useful, setUseful] = useState<string[]>(defaultUseful);
   return (
     <Layout title="Feedback Analyzer">
       <h1>Feedback Analyzer</h1>
       <button onClick={() => (setRaw([""]), setUseful([]))}>reset</button>
       <div className={"flex"}>
         <div className={"w-1/3"}>
-          <h2>raw</h2>
+          <h2>raw feedback</h2>
           {raw.map((r, ri) => (
             <div key={ri}>
               <TextareaAutosize
@@ -49,7 +49,7 @@ const FeedbackAnalyzerPage = (props: Props) => {
                 const prompt = `
                   User feedback: ${rawItem}
     
-                  Is the user feedback useful? (Yes/No):`;
+                  Is the user feedback a po? (Yes/No):`;
                 const completion = await (
                   await fetch(
                     encodeURI(`/api/openai/completion?prompt=${prompt}`)
@@ -77,5 +77,8 @@ const defaultRaw = [
   "Does my health insurance cover this service?",
   "I love how easy it is to find and compare different health products on this app. It saves me so much time and effort!",
 ];
-
+const defaultUseful = [
+  "Does my health insurance cover this service?",
+  "I love how easy it is to find and compare different health products on this app. It saves me so much time and effort!",
+];
 export default FeedbackAnalyzerPage;

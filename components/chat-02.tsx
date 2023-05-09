@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import { Input } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
@@ -23,10 +23,7 @@ export const Chat02 = ({
     // Scroll to the bottom of the thread when new messages are added
     threadRef.current.scrollTop = threadRef.current.scrollHeight;
   }, [thread]);
-  useEffect(() => {
-    send();
-  }, []);
-  const send = async () => {
+  const send = useCallback(async () => {
     let prompt = thread + addition + `\n${AILabel}:`;
     setThread(prompt);
     setAddition("");
@@ -39,7 +36,10 @@ export const Chat02 = ({
     );
     setThread(prompt + response + "\nYou: ");
     setLoading(false);
-  };
+  }, [AILabel, addition, thread]);
+  useEffect(() => {
+    send();
+  }, [send]);
   return (
     <div className={"flex flex-col overflow-auto"} style={{ height: "80vh" }}>
       <div className={"overflow-auto"} ref={threadRef}>

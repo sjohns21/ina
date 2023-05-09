@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import { Input } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
@@ -9,9 +9,7 @@ const fetcher = (
 ) => fetch(...args).then((res) => res.json());
 
 export const Chat = () => {
-  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([
-    { role: "user", content: "" },
-  ]);
+  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([{ role: "user", content: "" }]);
   const [addition, setAddition] = useState("");
   const [loading, setLoading] = useState(false);
   const threadRef = useRef<HTMLDivElement>(null);
@@ -20,20 +18,21 @@ export const Chat = () => {
     // Scroll to the bottom of the thread when new messages are added
     threadRef.current.scrollTop = threadRef.current.scrollHeight;
   }, [messages]);
-  const send = useCallback(async () => {
-    let next = [...messages, { role: "user" as const, content: addition }];
+  useEffect(() => {
+    send();
+  }, []);
+  const send = async () => {
+    let next = [...messages, { role: 'user' as const, content: addition }]
     setMessages(next);
     setAddition("");
     setLoading(true);
-    let response = await fetcher(`/api/openai/chat?messages=${next}`);
-    next = [...messages, { role: "assistant" as const, content: response }];
+    let response = await fetcher(
+      `/api/openai/chat?messages=${next}`
+    );
+    next = [...messages, { role: 'assistant' as const, content: response }]
     setMessages(next);
     setLoading(false);
-  }, [addition, messages]);
-  useEffect(() => {
-    send();
-  }, [send]);
-
+  };
   return (
     <div className={"flex flex-col overflow-auto"} style={{ height: "80vh" }}>
       <div className={"overflow-auto"} ref={threadRef}>

@@ -2,7 +2,6 @@ import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
 import "../globals.css";
 import { CssBaseline } from "@mui/material";
-import type {} from "@mui/lab/themeAugmentation";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import posthog from "posthog-js";
@@ -34,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
-  }, []);
+  }, [router.events]);
   return (
     <>
       <CssBaseline />
@@ -42,7 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </PostHogProvider>
       <Analytics />
-      <Script>
+      <Script id={"hotjar"}>
         {`(function(h,o,t,j,a,r){
           h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
           h._hjSettings={hjid:3484792,hjsv:6};

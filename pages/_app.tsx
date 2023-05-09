@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
+import Script from "next/script";
 
 // Check that PostHog is client-side (used to handle Next.js SSR)
 if (typeof window !== "undefined") {
@@ -41,6 +42,16 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </PostHogProvider>
       <Analytics />
+      <Script>
+        {`(function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:3484792,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
+      </Script>
     </>
   );
 }

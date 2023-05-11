@@ -3,10 +3,12 @@ import { useRef, useState } from "react";
 import YouTube from "react-youtube";
 
 const VisualAudio = () => {
-  const [time, setTime] = useState(341);
+  const initialTime = 341;
+  const [time, setTime] = useState(initialTime);
   const [imageIndex, setImageIndex] = useState(0);
   const image = images[imageIndex];
-  if (time === images[imageIndex + 1][0]) setImageIndex(imageIndex + 1);
+  if (images[imageIndex + 1] && time === images[imageIndex + 1][0])
+    setImageIndex(imageIndex + 1);
   const interval = useRef(-1);
 
   return (
@@ -17,7 +19,7 @@ const VisualAudio = () => {
           opts={{
             width: 640,
             playerVars: {
-              start: 341,
+              start: initialTime,
             },
           }}
           onPlay={() => {

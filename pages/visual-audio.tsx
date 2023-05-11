@@ -46,11 +46,31 @@ const images: [number, string, string][] = [
     "cortisol and adrenaline",
     "https://www.coeuscreativegroup.com/wp-content/uploads/2020/08/Brain-stress-response-limbic-neuroscience-anxiety-cortisol-adrenaline-scaled.jpg",
   ],
-  [410, "stress and energy", ""],
-  [431, "immune system", ""],
-  [436, "learning and memory", ""],
-  [445, "nootropics", ""],
-  [460, "comfort foods", ""],
+  [
+    410,
+    "stress and energy",
+    "https://ww2.kqed.org/app/uploads/sites/23/2021/09/iStock-1224548497-800x640.jpg",
+  ],
+  [
+    431,
+    "immune system",
+    "https://www.slohealthcenter.com/wp-content/uploads/2021/11/how-important-food-is-for-strengthening-the-immune-system-1140x703-1.jpeg",
+  ],
+  [
+    436,
+    "learning and memory",
+    "https://online.sunderland.ac.uk/wp-content/uploads/2022/01/Graphic-of-a-head-with-cogs-in-the-brain-and-people-around-it.jpg",
+  ],
+  [
+    445,
+    "nootropics",
+    "https://i0.wp.com/post.healthline.com/wp-content/uploads/2022/01/Medicine-Pills-Drug-Concept-header.jpg?w=1155&h=1528",
+  ],
+  [
+    460,
+    "comfort foods",
+    "https://insanelygoodrecipes.com/wp-content/uploads/2021/03/Homemade-French-Toast-with-Strawberries-and-Chocolate-Syrup.png",
+  ],
 ];
 
 export default VisualAudio;

@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import { Input } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import { useRouter } from "next/router";
+import { usePostHog } from "posthog-js/react";
 
 const fetcher = (
   ...args: [input: RequestInfo | URL, init?: RequestInit | undefined]
@@ -13,6 +15,8 @@ export const Chat02 = ({
   prompt: string;
   AILabel: string;
 }) => {
+  const router = useRouter();
+  const posthog = usePostHog();
   const [thread, setThread] = useState(prompt);
   const [addition, setAddition] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,6 +30,13 @@ export const Chat02 = ({
   useEffect(() => {
     send();
   }, []);
+  if (rows.length > 20) {
+    if (window.confirm("Conversations over 20 lines require paid accounts")) {
+      posthog?.capture("upgrade request");
+      alert("Coming soon!");
+    }
+    router.reload();
+  }
   const send = async () => {
     let prompt = thread + addition + `\n${AILabel}:`;
     setThread(prompt);

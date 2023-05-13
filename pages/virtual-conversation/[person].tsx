@@ -8,7 +8,7 @@ const PersonPage = () => {
   const character = String(router.query.person).replaceAll("-", " ");
 
   return (
-    <Layout title="Virtual Conversation">
+    <Layout title={"Chat with an AI copy of " + character}>
       Have a virtual conversation with an AI copy of:
       <Input value={character} readOnly={true} sx={{ pl: 1 }} />
       <Button

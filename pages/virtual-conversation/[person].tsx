@@ -9,7 +9,7 @@ const PersonPage = () => {
 
   return (
     <Layout title={"Chat with an AI copy of " + character}>
-      Have a virtual conversation with an AI copy of:
+      Chat with an AI copy of:
       <Input value={character} readOnly={true} sx={{ pl: 1 }} />
       <Button
         variant="text"

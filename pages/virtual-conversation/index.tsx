@@ -8,8 +8,8 @@ const VirtualConversationPage = () => {
   const [character, setCharacter] = useState("");
 
   return (
-    <Layout title="Virtual Conversation">
-      Have a virtual conversation with an AI copy of:
+    <Layout title="Chat with an AI copy of Anyone">
+      Chat with an AI copy of:
       <Input
         value={character}
         onChange={(e) => setCharacter(e.target.value)}

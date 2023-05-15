@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import Script from "next/script";
+import { DevSupport } from "@react-buddy/ide-toolbox-next";
+import { ComponentPreviews, useInitial } from "@/components/dev";
 
 // Check that PostHog is client-side (used to handle Next.js SSR)
 if (typeof window !== "undefined") {
@@ -38,7 +40,12 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <CssBaseline />
       <PostHogProvider client={posthog}>
-        <Component {...pageProps} />
+        <DevSupport
+          ComponentPreviews={ComponentPreviews}
+          useInitialHook={useInitial}
+        >
+          <Component {...pageProps} />
+        </DevSupport>
       </PostHogProvider>
       <Analytics />
       <Script id={"hotjar"}>

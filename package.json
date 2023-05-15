@@ -23,7 +23,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-youtube": "^10.1.0",
-    "swr": "^2.0.3"
+    "swr": "^2.0.3",
+    "@react-buddy/ide-toolbox-next": "^2.4.0",
+    "@react-buddy/palette-mui": "^5.0.1"
   },
   "devDependencies": {
     "@types/formidable": "^2.0.5",

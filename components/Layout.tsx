@@ -6,6 +6,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 
 const darkTheme = createTheme({
   palette: {
@@ -27,9 +28,10 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
     </Head>
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" component="div">
           ina
-        </Typography>
+        </Typography >
+        <GraphicEqIcon className={'ml-2'} />
         <Button>
           <Link color="inherit" href='/'>Home</Link>
         </Button>

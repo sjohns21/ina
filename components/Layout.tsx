@@ -40,7 +40,9 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
         </Button>
       </Toolbar>
     </AppBar>
-    {children}
+    <div className="p-4">
+      {children}
+    </div>
   </ThemeProvider>
 );
 

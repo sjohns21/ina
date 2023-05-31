@@ -15,7 +15,7 @@ export default function Marketing({ }: Props) {
             <div className='flex justify-between'>
                 <section className='w-1/4'>
                     <RecordVoiceOverIcon className='w-full' />
-                    <h3>Raw Feedback</h3>
+                    <h3 className='text-center'>Raw Feedback</h3>
                     <p>It would be nice if the documentation included search</p>
                     <p>Where is `Getting Started` in the documenation?</p>
                     <p>Haha</p>
@@ -23,24 +23,23 @@ export default function Marketing({ }: Props) {
                 <ArrowIcon className='m-2 mt-5' />
                 <section className='w-1/4'>
                     <FilterAltIcon className='w-full' />
-                    <h3>Filtered Feedback</h3>
+                    <h3 className='text-center'>Filtered Feedback</h3>
                     <p>It would be nice if the documentation included search</p>
                     <p>Where is `Getting Started` in the documenation?</p>
                 </section>
                 <ArrowIcon className='m-2 mt-5' />
                 <section className='w-1/4'>
                     <BugReportIcon className='w-full' />
-                    <h3>Identified Problems</h3>
+                    <h3 className='text-center'>Identified Problems</h3>
                     <p>The documentation is hard to navigate</p>
                 </section>
                 <ArrowIcon className='m-2 mt-5' />
                 <section className='w-1/4'>
                     <FeaturedVideoIcon className='w-full' />
-                    <h3>Product Suggestions</h3>
+                    <h3 className='text-center'>Product Suggestions</h3>
                     <p>Add search and navigation to the documentation</p>
                 </section>
             </div>
         </Layout>
     );
 }
-

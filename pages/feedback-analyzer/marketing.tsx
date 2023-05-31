@@ -10,8 +10,13 @@ type Props = {};
 export default function Marketing({ }: Props) {
     return (
         <Layout title="Feedback Analyzer">
-            <h1>Feedback Analyzer</h1>
-            <h2>Analyze user feedback, understand your customers, improve your product</h2>
+            <div className='flex mb-4'>
+                <div className='w-1/2'>
+                    <h1>Feedback Analyzer</h1>
+                    <h2>Analyze user feedback, understand your customers, improve your product</h2>
+                </div>
+                <img src='https://media.sproutsocial.com/uploads/2023/01/Social-listening.jpg' alt='social listening' className='w-1/2 rounded' />
+            </div>
             <div className='flex justify-between'>
                 <section className='w-1/4'>
                     <RecordVoiceOverIcon className='w-full' />
@@ -41,6 +46,6 @@ export default function Marketing({ }: Props) {
                     <p>Add search and navigation to the documentation</p>
                 </section>
             </div>
-        </Layout>
+        </Layout >
     );
 }

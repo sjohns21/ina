@@ -1,6 +1,17 @@
 import React, { ReactNode } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 type Props = {
   children?: ReactNode;
@@ -8,14 +19,27 @@ type Props = {
 };
 
 const Layout = ({ children, title = "This is the default title" }: Props) => (
-  <div style={{ padding: "1em" }}>
+  <ThemeProvider theme={darkTheme}>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          ina
+        </Typography>
+        <Button>
+          <Link color="inherit" href='/'>Home</Link>
+        </Button>
+        <Button>
+          <Link color="inherit" href={'mailto:steve21johnson@gmail.com'} target="_blank">Contact</Link>
+        </Button>
+      </Toolbar>
+    </AppBar>
     {children}
-  </div>
+  </ThemeProvider>
 );
 
 export default Layout;

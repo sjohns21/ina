@@ -1,13 +1,15 @@
 import Layout from '@/components/Layout';
-import React from 'react';
+import React, { useState } from 'react';
 import ArrowIcon from '@mui/icons-material/ArrowCircleRight';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import BugReportIcon from '@mui/icons-material/BugReport';
 import FeaturedVideoIcon from '@mui/icons-material/FeaturedVideo';
+import { FormControl, Button, TextField } from '@mui/material';
 type Props = {};
 
 export default function Marketing({ }: Props) {
+    const [email, setEmail] = useState('');
     return (
         <Layout title="Feedback Analyzer">
             <div className='flex mb-4'>
@@ -45,6 +47,21 @@ export default function Marketing({ }: Props) {
                     <h3 className='text-center'>Product Suggestions</h3>
                     <p>Add search and navigation to the documentation</p>
                 </section>
+            </div>
+            <div className='flex justify-center'>
+                <FormControl className='w-1/2'>
+                    <TextField
+                        id='email'
+                        label='Email address'
+                        variant='outlined'
+                        style={{ backgroundColor: 'gray' }}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <Button variant='contained' color='primary'>
+                        Sign up for early access
+                    </Button>
+                </FormControl>
             </div>
         </Layout >
     );

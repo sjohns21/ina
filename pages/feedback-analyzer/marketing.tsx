@@ -16,16 +16,17 @@ export default function Marketing({ }: Props) {
                 <section className='w-1/4'>
                     <RecordVoiceOverIcon className='w-full' />
                     <h3 className='text-center'>Raw Feedback</h3>
-                    <p>It would be nice if the documentation included search</p>
-                    <p>Where is `Getting Started` in the documenation?</p>
-                    <p>Haha</p>
+                    <p>`It would be nice if the documentation included search`</p>
+                    <p>`Where is `Getting Started` in the documenation?`</p>
+                    <p>`Haha`</p>
                 </section>
                 <ArrowIcon className='m-2 mt-5' />
                 <section className='w-1/4'>
                     <FilterAltIcon className='w-full' />
                     <h3 className='text-center'>Filtered Feedback</h3>
-                    <p>It would be nice if the documentation included search</p>
-                    <p>Where is `Getting Started` in the documenation?</p>
+                    <p>`It would be nice if the documentation included search`</p>
+                    <p>`Where is `Getting Started` in the documenation?`</p>
+
                 </section>
                 <ArrowIcon className='m-2 mt-5' />
                 <section className='w-1/4'>

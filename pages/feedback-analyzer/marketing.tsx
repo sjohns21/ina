@@ -6,10 +6,12 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import BugReportIcon from '@mui/icons-material/BugReport';
 import FeaturedVideoIcon from '@mui/icons-material/FeaturedVideo';
 import { FormControl, Button, TextField } from '@mui/material';
-type Props = {};
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
+type Props = {};
 export default function Marketing({ }: Props) {
     const [email, setEmail] = useState('');
+    const supabase = useSupabaseClient();
     return (
         <Layout title="Feedback Analyzer">
             <div className='flex mb-4'>
@@ -58,7 +60,13 @@ export default function Marketing({ }: Props) {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <Button variant='contained' color='primary'>
+                    <Button variant='contained' color='primary' onClick={async () => {
+                        const { data, error } = await supabase
+                            .from('sign_up')
+                            .insert([
+                                { email, page: 'feedback-analytics/marketing' },
+                            ]);
+                    }}>
                         Sign up for early access
                     </Button>
                 </FormControl>

@@ -66,6 +66,7 @@ export default function Marketing({ }: Props) {
                             .insert([
                                 { email, page: 'feedback-analytics/marketing' },
                             ]);
+                        (window as any).gtag('event', 'feedback_sign_up');
                     }}>
                         Sign up for early access
                     </Button>

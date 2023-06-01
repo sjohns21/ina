@@ -64,6 +64,13 @@ export default function App({ Component, pageProps }: AppProps<{
           a.appendChild(r);
         })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
         </Script>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-K3K2JX2FLR"></Script>
+        <Script id='google-analytics'>
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-K3K2JX2FLR');`}
+        </Script>
       </SessionContextProvider>
     </>
   );

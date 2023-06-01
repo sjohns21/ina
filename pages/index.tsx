@@ -10,7 +10,7 @@ const Index = () => {
           className="w-1/2 rounded-lg"
         />
         <div className="w-1/2 text-center">
-          <h1 className="text-4xl font-bold">Tools for Entrepreneurs</h1>
+          <h1 className="text-4xl font-bold">Building the Future</h1>
         </div>
       </div>
     </Layout>

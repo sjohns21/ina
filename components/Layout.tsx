@@ -10,7 +10,7 @@ import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 
 const darkTheme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
   },
 });
 
